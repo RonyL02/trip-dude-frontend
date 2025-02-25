@@ -1,0 +1,28 @@
+.loginCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(114, 161, 177);
+    border-radius: 40px;
+    padding: 40px;
+}
+
+.container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    box-shadow: 4cap;
+}
+
+.title {
+    align-self: flex-start;
+    color: white;
+}
+
+.loginButton {
+    margin-top: 10px;
+}
+
+.googleSignInButton {
+    margin-top: 200px;
+}
