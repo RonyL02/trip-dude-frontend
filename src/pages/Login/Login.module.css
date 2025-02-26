@@ -8,10 +8,11 @@
 }
 
 .container {
-    width: 100vw;
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
-    box-shadow: 4cap;
+    align-items: center;
 }
 
 .title {
@@ -21,8 +22,9 @@
 
 .loginButton {
     margin-top: 10px;
+    width: 100px;
 }
 
 .googleSignInButton {
-    margin-top: 200px;
+    margin-top: 20px;
 }
