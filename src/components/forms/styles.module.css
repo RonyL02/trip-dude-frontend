@@ -1,0 +1,12 @@
+.formError {
+    color: red;
+}
+
+.formInput {
+    padding: 15px;
+    font-size: larger;
+    border-radius: 10px;
+    border: none;
+    background-color: lightcyan;
+    color: dimgray;
+}
