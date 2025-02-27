@@ -1,0 +1,19 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    margin-top: 20px;
+}
+
+.title{
+    color: white;
+}
+
+.registerCard{
+    padding: 20px;
+}

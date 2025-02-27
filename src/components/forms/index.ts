@@ -1,2 +1,2 @@
-export * from './TextInput'
+export * from './FormInput'
 export * from './UseValidatedSchema'

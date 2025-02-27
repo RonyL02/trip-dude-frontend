@@ -6,9 +6,12 @@ import { useValidatedForm } from "../../components/forms";
 import { loginSchema, LoginSchemaType } from "./loginSchema";
 import { FormProvider } from "react-hook-form";
 import { Button } from "../../components/Button";
+import { useNavigate } from "react-router-dom";
+import { Card } from "../../components/Card/Card";
 
 export const Login = () => {
   const form = useValidatedForm(loginSchema);
+  const navigate = useNavigate();
 
   const handleGoogleLoginSuccess = async (
     credentialResponse: CredentialResponse
@@ -20,12 +23,11 @@ export const Login = () => {
   const handleLogin = async (schema: LoginSchemaType) => {
     const res = await login(schema.email, schema.password);
     console.log(res);
-    
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.loginCard}>
+      <Card>
         <h1 className={styles.title}>Welcome to TripDude</h1>
         <FormProvider {...form}>
           <LoginForm />
@@ -38,7 +40,12 @@ export const Login = () => {
         <div className={styles.googleSignInButton}>
           <GoogleLogin shape="pill" onSuccess={handleGoogleLoginSuccess} />
         </div>
-      </div>
+        <Button
+          className={styles.register}
+          onClick={() => navigate("/register")}
+          text="No account yet?"
+        />
+      </Card>
     </div>
   );
 };

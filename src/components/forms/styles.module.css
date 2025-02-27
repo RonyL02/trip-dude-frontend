@@ -10,3 +10,15 @@
     background-color: lightcyan;
     color: dimgray;
 }
+
+.imageInput{
+    padding: 10px;
+    display: inline-block;
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+}
+
+.imagePreview{
+    border-radius: 100%;
+}
