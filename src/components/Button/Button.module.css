@@ -1,4 +1,9 @@
 .button {
     background-color: lightcyan;
     color: dimgray;
+    padding: 15px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: medium;
+    cursor: pointer;
 }

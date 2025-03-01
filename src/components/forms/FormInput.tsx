@@ -6,7 +6,7 @@ type Props = {
   type: HTMLInputTypeAttribute;
 };
 
-export const TextInput: FC<Props> = ({ name, type }) => {
+export const FormInput: FC<Props> = ({ name, type }) => {
   const {
     register,
     formState: { errors },
