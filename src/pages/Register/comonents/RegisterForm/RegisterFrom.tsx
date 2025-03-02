@@ -7,7 +7,7 @@ export const RegisterForm = () => {
       <FormInput name="email" type="email" />
       <FormInput name="username" type="text" />
       <FormInput name="password" type="password" />
-      <ImageField name="imageUrl" />
+      <ImageField name="imageUrl" defaultImgUrl="default-avatar.png"/>
     </div>
   );
 };

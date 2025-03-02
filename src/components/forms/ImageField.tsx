@@ -4,9 +4,10 @@ import { upload } from "../../api/fileApi";
 import styles from "./styles.module.css";
 type Props = {
   name: string;
+  defaultImgUrl: string;
 };
 
-export const ImageField: FC<Props> = ({ name }) => {
+export const ImageField: FC<Props> = ({ name, defaultImgUrl }) => {
   const { setValue } = useFormContext();
   const [image, setImage] = useState<string | null>(null);
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ export const ImageField: FC<Props> = ({ name }) => {
         <img
           width={"100%"}
           height={"100%"}
-          src={image ?? "default-avatar.png"}
+          src={image ?? defaultImgUrl}
           className={styles.imagePreview}
         />
       </label>
