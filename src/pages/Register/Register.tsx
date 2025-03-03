@@ -2,7 +2,7 @@ import { FormProvider } from "react-hook-form";
 import { Card } from "../../components/Card/Card";
 import { useValidatedForm } from "../../components/forms";
 import { registerSchema, RegisterSchemaType } from "./registerSchema";
-import { RegisterForm } from "./comonents/RegisterForm";
+import { RegisterForm } from "./components/RegisterForm";
 import styles from "./Register.module.css";
 import { Button } from "../../components/Button";
 import { register } from "../../api/authApi";
