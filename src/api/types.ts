@@ -4,3 +4,9 @@ export type CreateUserDto = {
     imageUrl?: string,
     username: string
 }
+
+export type User = {
+    username: string;
+    accessToken: string;
+    refreshToken: string;
+}

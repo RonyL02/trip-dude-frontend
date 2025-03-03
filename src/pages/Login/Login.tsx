@@ -8,21 +8,23 @@ import { FormProvider } from "react-hook-form";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
+import { useUser } from "../../providers/UserProvider";
 
 export const Login = () => {
   const form = useValidatedForm(loginSchema);
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const handleGoogleLoginSuccess = async (
     credentialResponse: CredentialResponse
   ) => {
-    const res = await loginWithGoogle(credentialResponse?.credential ?? "");
-    console.log(res);
+    const user = await loginWithGoogle(credentialResponse?.credential ?? "");
+    setUser(user);
   };
 
   const handleLogin = async (schema: LoginSchemaType) => {
-    const res = await login(schema.email, schema.password);
-    console.log(res);
+    const user = await login(schema.email, schema.password);
+    setUser(user);
   };
 
   return (
