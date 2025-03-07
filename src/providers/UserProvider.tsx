@@ -9,6 +9,7 @@ import {
 } from "react";
 import { User } from "../api/types";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 type UserContextState = {
   user: User | null;
@@ -23,16 +24,15 @@ type ProviderProps = {
 
 export const UserProvider: FC<ProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
+  const accessToken = Cookies.get("access_token");
+  const refreshToken = Cookies.get("refresh_token");
 
   useEffect(() => {
-    if (user) {
-      Cookies.set("access_token", user.accessToken, { expires: 1 / 24 });
-      Cookies.set("refresh_token", user.refreshToken, { expires: 3 });
-    } else {
-      Cookies.remove("access_token");
-      Cookies.remove("refresh_token");
+    if (!refreshToken && !accessToken) {
+      navigate("/login");
     }
-  }, [user]);
+  }, [refreshToken, accessToken, navigate]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
