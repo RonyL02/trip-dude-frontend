@@ -6,12 +6,18 @@ import { RegisterForm } from "./components/RegisterForm";
 import styles from "./Register.module.css";
 import { Button } from "../../components/Button";
 import { register } from "../../api/authApi";
+import { upload } from "../../api/fileApi";
+import { CreateUserDto } from "../../api/types";
 
 export const Register = () => {
   const form = useValidatedForm(registerSchema);
 
   const handleRegister = async (schema: RegisterSchemaType) => {
-    const response = await register(schema);
+    const { image, ...user } = schema;
+    const { newFileUrl } = await upload(image);
+    const newUser: CreateUserDto = { ...user, imageUrl: newFileUrl };
+
+    const response = await register(newUser);
     console.log(response);
   };
 

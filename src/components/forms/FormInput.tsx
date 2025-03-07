@@ -13,16 +13,16 @@ export const FormInput: FC<Props> = ({ name, type }) => {
   } = useFormContext();
 
   return (
-    <div>
+    <>
       <input
         className={styles.formInput}
         type={type}
         {...register(name)}
         placeholder={name}
       />
+    
       {errors[name]?.message && (
         <p className={styles.formError}>{errors[name].message.toString()}</p>
       )}
-    </div>
-  );
+  </>);
 };

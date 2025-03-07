@@ -4,7 +4,7 @@ import { useValidatedForm } from "../../components/forms";
 import { createPostSchema, CreatePostSchemaType } from "./CreatePostSchema";
 import styles from "./CreatePost.module.css";
 import { Button } from "../../components/Button";
-import { createPost } from "../../api/authApi"; 
+import { createPost } from "../../api/authApi";
 import { useState } from "react";
 
 export const CreatePost = () => {
@@ -13,7 +13,7 @@ export const CreatePost = () => {
   const [activityType, setActivityType] = useState("Beach Vacation");
 
   const handleCreatePost = async (schema: CreatePostSchemaType) => {
-    const response = await createPost({ ...schema });
+    const response = await createPost(schema);
     console.log(response);
   };
 
@@ -27,14 +27,14 @@ export const CreatePost = () => {
   return (
     <div className={styles.container}>
       <Card className={styles.createPostCard}>
-
-  
         <div className={styles.activityContainer}>
-          <label htmlFor="activityType" className={styles.activityLabel}>Activity Type</label>
-          <select 
-            id="activityType" 
+          <label htmlFor="activityType" className={styles.activityLabel}>
+            Activity Type
+          </label>
+          <select
+            id="activityType"
             className={styles.activitySelect}
-            value={activityType} 
+            value={activityType}
             onChange={(e) => setActivityType(e.target.value)}
           >
             <option value="Beach Vacation">Beach Vacation</option>
@@ -47,35 +47,37 @@ export const CreatePost = () => {
 
         <div className={styles.imageUploadContainer}>
           {imagePreview ? (
-            <img src={imagePreview} alt="Uploaded preview" className={styles.image} />
+            <img
+              src={imagePreview}
+              alt="Uploaded preview"
+              className={styles.image}
+            />
           ) : (
             <label htmlFor="imageUpload" className={styles.imageUploadLabel}>
               Click to upload an image
-              <input 
-                type="file" 
-                id="imageUpload" 
+              <input
+                type="file"
+                id="imageUpload"
                 accept="image/*"
                 className={styles.imageInput}
-                onChange={handleImageChange} 
+                onChange={handleImageChange}
               />
             </label>
           )}
         </div>
 
-    
         <FormProvider {...form}>
-          <textarea 
+          <textarea
             name="description"
             className={styles.textarea}
             placeholder="Write something about this post..."
           />
         </FormProvider>
 
-
         <Button
           className={styles.button}
           text="Create Post"
-          onClick={form.handleSubmit((data) => handleCreatePost({ ...data, activityType }))}
+          onClick={form.handleSubmit(handleCreatePost)}
         />
       </Card>
     </div>

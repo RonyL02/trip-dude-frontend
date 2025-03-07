@@ -11,5 +11,4 @@ export type CreatePostSchemaType = {
   title: string;
   description: string;
   imageUrl: string;
-  activityType: string;
 };

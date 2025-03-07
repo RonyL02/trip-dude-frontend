@@ -1,7 +1,17 @@
-.container {
+.formContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
     padding: 50px;
+}
+
+.imageContainer {
+    justify-self: center;
 }
