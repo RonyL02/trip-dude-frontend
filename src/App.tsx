@@ -4,6 +4,7 @@ import { Login } from "./pages/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Register } from "./pages/Register";
 import { CreatePost } from "./pages/CreatePost/CreatePost";
+import { Comments } from "./pages/Comments";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/comments" element={<Comments />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider>

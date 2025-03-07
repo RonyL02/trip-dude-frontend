@@ -1,0 +1,29 @@
+.commentsContainer {
+    max-width: 600px;
+    margin: auto;
+    padding: 16px;
+  }
+  
+  .commentInputContainer {
+    display: flex;
+    margin-bottom: 16px;
+  }
+  
+  .commentInput {
+    flex-grow: 1;
+    margin-right: 8px;
+  }
+  
+  .commentCard {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .commentText {
+    margin-left: 8px;
+  }
+  
