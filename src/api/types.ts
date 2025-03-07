@@ -5,8 +5,8 @@ export type CreateUserDto = {
     username: string
 }
 
+export type CreatePostDto = { description: string; imageUrl: string }
+
 export type User = {
     username: string;
-    accessToken: string;
-    refreshToken: string;
 }

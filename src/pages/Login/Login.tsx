@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 import { useUser } from "../../providers/UserProvider";
 import { toast } from "react-toastify";
+import { Title } from "../../components/Title";
 
 export const Login = () => {
   const form = useValidatedForm(loginSchema);
@@ -39,7 +40,7 @@ export const Login = () => {
   return (
     <div className={styles.container}>
       <Card>
-        <h1 className={styles.title}>Welcome to TripDude</h1>
+        <Title text="Welcome to TripDude"/>
         <FormProvider {...form}>
           <LoginForm />
         </FormProvider>

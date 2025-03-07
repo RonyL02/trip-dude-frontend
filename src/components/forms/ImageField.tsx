@@ -5,7 +5,8 @@ import { z } from "zod";
 import { ACCEPTED_IMAGE_MIME_TYPES, MAX_FILE_SIZE } from "../../consts";
 type Props = {
   name: string;
-  defaultImgUrl: string;
+  defaultImgUrl?: string;
+  displayMode?: "contain" | "cover" | "fill";
 };
 
 export const imageSchema = z
@@ -19,7 +20,11 @@ export const imageSchema = z
     "Only .jpg, .jpeg, .png and .webp formats are supported."
   );
 
-export const ImageField: FC<Props> = ({ name, defaultImgUrl }) => {
+export const ImageField: FC<Props> = ({
+  name,
+  defaultImgUrl,
+  displayMode = "contain",
+}) => {
   const { setValue } = useFormContext();
   const [image, setImage] = useState<string | null>(null);
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,8 +39,8 @@ export const ImageField: FC<Props> = ({ name, defaultImgUrl }) => {
     <div className={styles.imageUploadContainer}>
       <label htmlFor="imageUpload" className={styles.imageUploadLabel}>
         <img
+          style={{ objectFit: displayMode }}
           src={image ?? defaultImgUrl}
-          alt="Uploaded preview"
           className={styles.image}
         />
         {!image && !defaultImgUrl && <p>Click to upload an image</p>}

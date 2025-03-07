@@ -58,7 +58,7 @@
 .image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: fill;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -76,4 +76,19 @@
 
 .button:hover {
     background: #5a4fdc;
+}
+
+
+.textarea {
+    width: 100%;
+    min-height: 80px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+}
+
+.textarea:focus {
+    border-color: #6c5ce7;
+    outline: none;
 }

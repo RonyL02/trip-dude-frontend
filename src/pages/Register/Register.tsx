@@ -8,6 +8,7 @@ import { Button } from "../../components/Button";
 import { register } from "../../api/authApi";
 import { upload } from "../../api/fileApi";
 import { CreateUserDto } from "../../api/types";
+import { Title } from "../../components/Title";
 
 export const Register = () => {
   const form = useValidatedForm(registerSchema);
@@ -24,7 +25,7 @@ export const Register = () => {
   return (
     <div className={styles.container}>
       <Card className={styles.registerCard}>
-        <h1 className={styles.title}>New Account</h1>
+        <Title text="New Acoount"/>
         <FormProvider {...form}>
           <RegisterForm />
         </FormProvider>
