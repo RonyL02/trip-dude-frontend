@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Comments.module.css";
-import apiClient from "../apiClient";
+import apiClient from "../../api/apiClient";
+
 
 interface Comment {
   id: string;
