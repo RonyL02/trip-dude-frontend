@@ -10,6 +10,8 @@ import {
 import { User } from "../api/types";
 import Cookies from "js-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getProfile } from "../api/userApi";
+import { toast } from "react-toastify";
 
 type UserContextState = {
   user: User | null;
@@ -39,12 +41,16 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
     ) {
       navigate("/login");
     }
-  }, [
-    refreshToken,
-    accessToken,
-    navigate,
-    location.pathname,
-  ]);
+
+    if (accessToken) {
+      getProfile()
+        .then((result) => setUser(result))
+        .catch(() => {
+          toast.error("something went wrong");
+          navigate("/login");
+        });
+    }
+  }, [refreshToken, accessToken, navigate, location.pathname]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

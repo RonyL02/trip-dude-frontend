@@ -19,8 +19,8 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/create-post" element={<CreatePost />} />
             <Route
-              path="/comments"
-              element={<Comments postId="somePostId" />}
+              path="/comments/:postId"
+              element={<Comments />}
             />
           </Routes>
         </UserProvider>

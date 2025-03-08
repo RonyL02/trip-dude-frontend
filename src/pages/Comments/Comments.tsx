@@ -1,100 +1,88 @@
-import React, { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./Comments.module.css";
-import apiClient from "../../api/apiClient";
+import { addComment, getComments } from "../../api/commentApi";
+import { Comment } from "../../api/types";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { FormInput, useValidatedForm } from "../../components/forms";
+import { commentSchema, CreateCommentSchemaType } from "./CommentsSchema";
+import { FormProvider } from "react-hook-form";
+import { Button } from "../../components/Button";
+import { Title } from "../../components/Title";
+import { CommentRow } from "./components/Comment";
+import { AxiosError } from "axios";
+import { Card } from "../../components/Card/Card";
+import { useUser } from "../../providers/UserProvider";
 
-
-interface Comment {
-  id: string;
-  username: string;
-  text: string;
-}
-
-interface CommentsProps {
-  postId: string;
-}
-
-const Comments: React.FC<CommentsProps> = ({ postId }) => {
+export const Comments: FC = () => {
+  const form = useValidatedForm(commentSchema);
+  const { postId } = useParams<{ postId: string }>();
   const [comments, setComments] = useState<Comment[]>([]);
-  const [newComment, setNewComment] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const commentsPerPage = 5;
-
+  const [postNotFound, setPostNotFound] = useState(false);
+  const { user } = useUser();
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await apiClient.get(`/comments/${postId}`);
-        setComments(response.data);
+        const commentsResponse = await getComments(postId ?? "");
+        setComments(commentsResponse.reverse());
       } catch (error) {
-        console.error("Failed to fetch comments", error);
+        if (error instanceof AxiosError && error.status === 404) {
+          toast.error("Post not found");
+          setPostNotFound(true);
+        }
       }
     };
-    fetchComments();
+
+    if (postId) {
+      fetchComments();
+    }
   }, [postId]);
 
-  const handleAddComment = async () => {
-    if (!newComment.trim()) return;
+  const handleAddComment = async (schema: CreateCommentSchemaType) => {
     try {
-      const newCommentObj = { username: "Current User", text: newComment };
-      const response = await apiClient.post(`/comments/${postId}/add`, newCommentObj);
-      setComments([...comments, response.data]);
-      setNewComment("");
-
-      if ((comments.length + 1) % commentsPerPage === 1) {
-        setCurrentPage(Math.ceil((comments.length + 1) / commentsPerPage));
-      }
-    } catch (error) {
-      console.error("Failed to add comment", error);
+      const response = await addComment({ ...schema, postId: postId! });
+      setComments((prev) => [
+        {
+          _id: response.newId,
+          content: schema.content,
+          username: user!.username,
+          imageUrl: user!.imageUrl,
+        },
+        ...prev,
+      ]);
+      toast.success("comment added successfully");
+    } catch {
+      toast.error("failed to add comment");
     }
   };
 
-  const indexOfLastComment = currentPage * commentsPerPage;
-  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
-
-  const totalPages = Math.ceil(comments.length / commentsPerPage);
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  return (
-    <div className={styles.commentsContainer}>
-      <h2 className={styles.commentsTitle}>Comments</h2>
+  return postNotFound ? (
+    <Title text="Post not found" />
+  ) : (
+    <Card className={styles.commentsContainer}>
+      <Title text="Comments" />
       <div className={styles.commentInputContainer}>
-        <input
-          className={styles.commentInput}
-          type="text"
-          placeholder="Write a comment..."
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+        <FormProvider {...form}>
+          <div className={styles.commentInput}>
+            <FormInput name="content" placeholder="Write a comment..." />
+          </div>
+        </FormProvider>
+        <Button
+          className={styles.commentButton}
+          text="Add Comment"
+          onClick={form.handleSubmit(handleAddComment)}
         />
-        <button className={styles.commentButton} onClick={handleAddComment}>Add Comment</button>
       </div>
       <div className={styles.commentsList}>
-        {currentComments.map((comment) => (
-          <div key={comment.id} className={styles.commentCard}>
-            <div className={styles.commentAvatar}></div>
-            <div className={styles.commentContent}>
-              <span className={styles.commentUsername}>{comment.username}</span>
-              <p className={styles.commentText}>{comment.text}</p>
-            </div>
-          </div>
+        {comments.map(({ content, username, _id, imageUrl }) => (
+          <CommentRow
+            key={_id}
+            content={content}
+            username={username}
+            imageUrl={imageUrl}
+          />
         ))}
       </div>
-      {totalPages > 1 && (
-        <div className={styles.pagination}>
-          {currentPage > 1 && (
-            <button className={styles.pageButton} onClick={() => paginate(currentPage - 1)}>
-              {currentPage - 1}
-            </button>
-          )}
-          <button className={styles.pageButtonActive}>{currentPage}</button>
-          {currentPage < totalPages && (
-            <button className={styles.pageButton} onClick={() => paginate(currentPage + 1)}>
-              {currentPage + 1}
-            </button>
-          )}
-        </div>
-      )}
-    </div>
+    </Card>
   );
 };
-
-export default Comments;

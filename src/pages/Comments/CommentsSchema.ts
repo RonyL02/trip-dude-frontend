@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-export const CommentSchema = z.object({
-  username: z.string().min(1, "Username is required"),
-  text: z.string().min(1, "Comment text is required"),
+export const commentSchema = z.object({
+  content: z.string().min(1, "Comment text is required").trim(),
 });
+
+export type CreateCommentSchemaType = z.infer<typeof commentSchema>
+

@@ -1,2 +1,1 @@
-export { default as Comments } from "./Comments";
-export * from "./CommentsSchema";
+export * from "./Comments";
