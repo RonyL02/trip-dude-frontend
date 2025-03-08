@@ -42,7 +42,7 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
       navigate("/login");
     }
 
-    if (accessToken) {
+    if (!publicRoutes.includes(location.pathname)) {
       getProfile()
         .then((result) => setUser(result))
         .catch(() => {
