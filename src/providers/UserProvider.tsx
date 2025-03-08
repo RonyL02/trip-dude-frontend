@@ -31,9 +31,6 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const publicRoutes = ["/login", "/register"];
-    console.log(
-      !refreshToken && !accessToken && !publicRoutes.includes(location.pathname)
-    );
 
     if (
       !refreshToken &&

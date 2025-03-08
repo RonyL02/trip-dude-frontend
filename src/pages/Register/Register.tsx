@@ -11,9 +11,11 @@ import { CreateUserDto } from "../../api/types";
 import { Title } from "../../components/Title";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const form = useValidatedForm(registerSchema);
+  const navigate = useNavigate();
 
   const handleRegister = async (schema: RegisterSchemaType) => {
     const { image, ...user } = schema;
@@ -22,8 +24,8 @@ export const Register = () => {
       const { newFileUrl } = await upload(image);
       const newUser: CreateUserDto = { ...user, imageUrl: newFileUrl };
 
-      const response = await register(newUser);
-      console.log(response);
+      await register(newUser);
+      navigate("/login");
     } catch (error) {
       if (error instanceof AxiosError && error.status === 409) {
         toast.error("User already exists");

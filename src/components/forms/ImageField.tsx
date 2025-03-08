@@ -12,13 +12,12 @@ type Props = {
 export const imageSchema = z
   .any()
   .optional()
-  .refine((file) => {    
-    return file?.size <= MAX_FILE_SIZE;
+  .refine((file) => {
+    return file?.size ?? 0 <= MAX_FILE_SIZE;
   }, `Max image size is 5MB.`)
-  .refine(
-    (file) => ACCEPTED_IMAGE_MIME_TYPES.includes(file?.type),
-    "Only .jpg, .jpeg, .png and .webp formats are supported."
-  );
+  .refine((file) => {
+    return file.type ? ACCEPTED_IMAGE_MIME_TYPES.includes(file?.type) : true;
+  }, "Only .jpg, .jpeg, .png and .webp formats are supported.");
 
 export const ImageField: FC<Props> = ({
   name,
@@ -33,7 +32,7 @@ export const ImageField: FC<Props> = ({
   const [image, setImage] = useState<string | null>(null);
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {      
+    if (file) {
       setValue(name, file);
       setImage(URL.createObjectURL(file));
     }
