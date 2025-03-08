@@ -6,6 +6,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Register } from "./pages/Register";
 import { UserProvider } from "./providers/UserProvider";
 import { CreatePost } from "./pages/CreatePost/CreatePost";
+import { Comments } from "./pages/Comments";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
@@ -17,6 +18,10 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create-post" element={<CreatePost />} />
+            <Route
+              path="/comments/:postId"
+              element={<Comments />}
+            />
           </Routes>
         </UserProvider>
       </BrowserRouter>
