@@ -9,23 +9,34 @@ import { register } from "../../api/authApi";
 import { upload } from "../../api/fileApi";
 import { CreateUserDto } from "../../api/types";
 import { Title } from "../../components/Title";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 export const Register = () => {
   const form = useValidatedForm(registerSchema);
 
   const handleRegister = async (schema: RegisterSchemaType) => {
     const { image, ...user } = schema;
-    const { newFileUrl } = await upload(image);
-    const newUser: CreateUserDto = { ...user, imageUrl: newFileUrl };
 
-    const response = await register(newUser);
-    console.log(response);
+    try {
+      const { newFileUrl } = await upload(image);
+      const newUser: CreateUserDto = { ...user, imageUrl: newFileUrl };
+
+      const response = await register(newUser);
+      console.log(response);
+    } catch (error) {
+      if (error instanceof AxiosError && error.status === 409) {
+        toast.error("User already exists");
+      } else {
+        toast.error("Failed to create user");
+      }
+    }
   };
 
   return (
     <div className={styles.container}>
       <Card className={styles.registerCard}>
-        <Title text="New Acoount"/>
+        <Title text="New Acoount" />
         <FormProvider {...form}>
           <RegisterForm />
         </FormProvider>

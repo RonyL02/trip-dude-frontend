@@ -9,7 +9,7 @@ export const CreatePostForm = () => {
         name="description"
         placeholder="Write something about this post..."
       />
-      <ImageField name="imageUrl" />
+      <ImageField name="image" />
     </div>
   );
 };

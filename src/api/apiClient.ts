@@ -17,15 +17,11 @@ apiClient.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
-
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
 
             const refreshToken = Cookies.get("refresh_token");
-            if (!refreshToken) {
-                return Promise.reject(error);
-            }
-
+            
             try {
                 const { data } = await apiClient.post("/auth/refreshToken", undefined, {
                     headers: {
@@ -39,6 +35,8 @@ apiClient.interceptors.response.use(
             } catch {
                 Cookies.remove("refresh_token")
                 Cookies.remove("access_token")
+                
+                window.location.href = '/login'
             }
         }
 
