@@ -7,15 +7,26 @@ interface Comment {
 }
 
 const Comments: React.FC = () => {
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<Comment[]>(Array.from({ length: 50 }, (_, i) => ({
+    username: `User${i + 1}`,
+    text: `This is comment number ${i + 1}`
+  })));
   const [newComment, setNewComment] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const commentsPerPage = 5;
 
   const handleAddComment = () => {
     if (!newComment.trim()) return;
     const newCommentObj: Comment = { username: "Current User", text: newComment };
-    setComments([...comments, newCommentObj]);
+    setComments([newCommentObj, ...comments]);
     setNewComment("");
   };
+
+  const indexOfLastComment = currentPage * commentsPerPage;
+  const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className={styles.commentsContainer}>
@@ -31,7 +42,7 @@ const Comments: React.FC = () => {
         <button className={styles.commentButton} onClick={handleAddComment}>Add Comment</button>
       </div>
       <div className={styles.commentsList}>
-        {comments.map((comment, index) => (
+        {currentComments.map((comment, index) => (
           <div key={index} className={styles.commentCard}>
             <div className={styles.commentAvatar}></div>
             <div className={styles.commentContent}>
@@ -39,6 +50,13 @@ const Comments: React.FC = () => {
               <p className={styles.commentText}>{comment.text}</p>
             </div>
           </div>
+        ))}
+      </div>
+      <div className={styles.pagination}>
+        {Array.from({ length: Math.ceil(comments.length / commentsPerPage) }, (_, i) => (
+          <button key={i} className={styles.pageButton} onClick={() => paginate(i + 1)}>
+            {i + 1}
+          </button>
         ))}
       </div>
     </div>
