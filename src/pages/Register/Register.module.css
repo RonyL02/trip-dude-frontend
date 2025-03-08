@@ -6,14 +6,11 @@
     align-items: center;
 }
 
-.button{
-    margin-top: 20px;
-}
-
 .title{
-    color: white;
+    color: #555;
 }
 
 .registerCard{
     padding: 20px;
+    justify-self: center;
 }

@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(114, 161, 177);
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 40px;
     padding: 40px;
 }
