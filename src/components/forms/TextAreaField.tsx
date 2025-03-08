@@ -1,12 +1,13 @@
-import { FC, HTMLInputTypeAttribute } from "react";
-import { useFormContext } from "react-hook-form";
+import { FC } from "react";
 import styles from "./styles.module.css";
+import { useFormContext } from "react-hook-form";
+
 type Props = {
   name: string;
-  type: HTMLInputTypeAttribute;
+  placeholder?: string;
 };
 
-export const FormInput: FC<Props> = ({ name, type }) => {
+export const TextAreaField: FC<Props> = ({ name, placeholder }) => {
   const {
     register,
     formState: { errors },
@@ -14,15 +15,14 @@ export const FormInput: FC<Props> = ({ name, type }) => {
 
   return (
     <>
-      <input
-        className={styles.formInput}
-        type={type}
+      <textarea
         {...register(name)}
-        placeholder={name}
+        className={styles.textarea}
+        placeholder={placeholder ?? name}
       />
-    
       {errors[name]?.message && (
         <p className={styles.formError}>{errors[name].message.toString()}</p>
       )}
-  </>);
+    </>
+  );
 };
