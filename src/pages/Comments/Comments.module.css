@@ -2,28 +2,83 @@
     max-width: 600px;
     margin: auto;
     padding: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .commentsTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    text-align: center;
   }
   
   .commentInputContainer {
     display: flex;
+    gap: 8px;
     margin-bottom: 16px;
   }
   
   .commentInput {
     flex-grow: 1;
-    margin-right: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  .commentButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .commentButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .commentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
   }
   
   .commentCard {
     display: flex;
     align-items: center;
-    padding: 8px;
-    margin-bottom: 8px;
-    border: 1px solid #ddd;
+    padding: 12px;
+    background: #f9f9f9;
     border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .commentAvatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  
+  .commentContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .commentUsername {
+    font-weight: bold;
   }
   
   .commentText {
-    margin-left: 8px;
+    color: #555;
+    font-size: 14px;
   }
   

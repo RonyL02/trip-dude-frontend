@@ -19,7 +19,7 @@ const Comments: React.FC = () => {
 
   return (
     <div className={styles.commentsContainer}>
-      <h2>Comments</h2>
+      <h2 className={styles.commentsTitle}>Comments</h2>
       <div className={styles.commentInputContainer}>
         <input
           className={styles.commentInput}
@@ -28,14 +28,16 @@ const Comments: React.FC = () => {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
-        <button onClick={handleAddComment}>Add Comment</button>
+        <button className={styles.commentButton} onClick={handleAddComment}>Add Comment</button>
       </div>
-      <div>
+      <div className={styles.commentsList}>
         {comments.map((comment, index) => (
           <div key={index} className={styles.commentCard}>
-            <span className={styles.commentText}>
-              <strong>{comment.username}:</strong> {comment.text}
-            </span>
+            <div className={styles.commentAvatar}></div>
+            <div className={styles.commentContent}>
+              <span className={styles.commentUsername}>{comment.username}</span>
+              <p className={styles.commentText}>{comment.text}</p>
+            </div>
           </div>
         ))}
       </div>
