@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from 'js-cookie'
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
-    withCredentials:true,
+    withCredentials: true,
 });
 
 apiClient.interceptors.request.use((config) => {
@@ -21,21 +21,19 @@ apiClient.interceptors.response.use(
             originalRequest._retry = true;
 
             const refreshToken = Cookies.get("refresh_token");
-            
+
             try {
-                const { data } = await apiClient.post("/auth/refreshToken", undefined, {
+                await apiClient.post("/auth/refreshToken", undefined, {
                     headers: {
                         Authorization: `Bearer ${refreshToken}`
                     }
                 });
 
-                originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
-
                 return apiClient(originalRequest);
             } catch {
                 Cookies.remove("refresh_token")
                 Cookies.remove("access_token")
-                
+
                 window.location.href = '/login'
             }
         }
