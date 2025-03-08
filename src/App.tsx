@@ -14,7 +14,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/comments" element={<Comments />} />
+          <Route path="/comments" element={<Comments postId="somePostId" />} />
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider>
