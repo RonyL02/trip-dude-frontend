@@ -9,6 +9,7 @@ import { CreatePost } from "./pages/CreatePost/CreatePost";
 import { Comments } from "./pages/Comments";
 import { ToastContainer } from "react-toastify";
 import { Navbar } from "./components/Navbar";
+import { ActivitySearch } from "./pages/ActivitySearch";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/comments/:postId" element={<Comments />} />
+            <Route path="/activities" element={<ActivitySearch />} />
           </Routes>
         </UserProvider>
       </BrowserRouter>

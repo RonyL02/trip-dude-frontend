@@ -13,8 +13,9 @@ export const Navbar = () => {
         </div>
         <div className={styles.navbarLinks}>
           <Link to="/">Home</Link>
-          <Link to="/explore">Explore</Link>
           <Link to="/profile">Profile</Link>
+          <Link to="/activities">Activities</Link>
+          <Link to="/explore">Explore</Link>
         </div>
       </nav>
     )
