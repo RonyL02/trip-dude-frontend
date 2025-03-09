@@ -7,6 +7,7 @@ import { Register } from "./pages/Register";
 import { UserProvider } from "./providers/UserProvider";
 import { CreatePost } from "./pages/CreatePost/CreatePost";
 import { ToastContainer } from "react-toastify";
+import { PostsFeed } from "./pages/PostsFeed";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/posts" element={<PostsFeed />} />
           </Routes>
         </UserProvider>
       </BrowserRouter>

@@ -1,0 +1,13 @@
+.commentsButton {
+    background-color: transparent;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+  
+  .commentsButton:hover {
+    color: darkblue;
+  }
+  
