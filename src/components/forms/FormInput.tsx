@@ -3,10 +3,11 @@ import { useFormContext } from "react-hook-form";
 import styles from "./styles.module.css";
 type Props = {
   name: string;
-  type: HTMLInputTypeAttribute;
+  type?: HTMLInputTypeAttribute;
+  placeholder?: string;
 };
 
-export const FormInput: FC<Props> = ({ name, type }) => {
+export const FormInput: FC<Props> = ({ name, placeholder, type = "text" }) => {
   const {
     register,
     formState: { errors },
@@ -18,11 +19,12 @@ export const FormInput: FC<Props> = ({ name, type }) => {
         className={styles.formInput}
         type={type}
         {...register(name)}
-        placeholder={name}
+        placeholder={placeholder ?? name}
       />
-    
+
       {errors[name]?.message && (
         <p className={styles.formError}>{errors[name].message.toString()}</p>
       )}
-  </>);
+    </>
+  );
 };

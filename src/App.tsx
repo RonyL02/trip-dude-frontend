@@ -6,6 +6,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Register } from "./pages/Register";
 import { UserProvider } from "./providers/UserProvider";
 import { CreatePost } from "./pages/CreatePost/CreatePost";
+import { Comments } from "./pages/Comments";
 import { ToastContainer } from "react-toastify";
 import { PostsFeed } from "./pages/PostsFeed";
 
@@ -19,6 +20,10 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/posts" element={<PostsFeed />} />
+            <Route
+              path="/comments/:postId"
+              element={<Comments />}
+            />
           </Routes>
         </UserProvider>
       </BrowserRouter>
