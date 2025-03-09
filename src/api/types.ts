@@ -19,3 +19,23 @@ export type Comment = {
     content: string;
     imageUrl?: string;
 }
+
+
+export type Activity = {
+    id?: string;
+    name?: string;
+    shortDescription?: string;
+    description?: string;
+    geoCode?: {
+        latitude?: number;
+        longitude?: number;
+    };
+    rating?: string;
+    price?: {
+        amount?: string;
+        currencyCode?: string;
+    };
+    pictures?: string[];
+    bookingLink?: string;
+    minimumDuration?: string;
+};

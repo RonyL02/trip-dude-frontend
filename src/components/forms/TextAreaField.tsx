@@ -5,9 +5,10 @@ import { useFormContext } from "react-hook-form";
 type Props = {
   name: string;
   placeholder?: string;
+  className?:string
 };
 
-export const TextAreaField: FC<Props> = ({ name, placeholder }) => {
+export const TextAreaField: FC<Props> = ({ name, placeholder,className }) => {
   const {
     register,
     formState: { errors },
@@ -17,7 +18,7 @@ export const TextAreaField: FC<Props> = ({ name, placeholder }) => {
     <>
       <textarea
         {...register(name)}
-        className={styles.textarea}
+        className={`${styles.textarea} ${className}`}
         placeholder={placeholder ?? name}
       />
       {errors[name]?.message && (
