@@ -29,28 +29,11 @@
 
 .searchButton {
     position: unset;
-    /* font-size: xx-large; */
-    /* border-radius: 100%; */
-    /* border: none;
-    background-color: transparent; */
 }
 
 .searchButton:hover {
     background-color: rgb(86, 51, 129);
 }
-
-.resultMessage {}
-
-/* .resultsContainer {
-    display: grid;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 80vh;
-    overflow-y: auto;
-    padding-right: 8px;
-}
- */
-
 
 .resultsContainer {
     height: 80vh;
