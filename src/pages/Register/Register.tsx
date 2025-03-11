@@ -6,19 +6,39 @@ import { RegisterForm } from "./components/RegisterForm";
 import styles from "./Register.module.css";
 import { Button } from "../../components/Button";
 import { register } from "../../api/authApi";
+import { upload } from "../../api/fileApi";
+import { CreateUserDto } from "../../api/types";
+import { Title } from "../../components/Title";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const form = useValidatedForm(registerSchema);
+  const navigate = useNavigate();
 
   const handleRegister = async (schema: RegisterSchemaType) => {
-    const response = await register(schema);
-    console.log(response);
+    const { image, ...user } = schema;
+
+    try {
+      const { newFileUrl } = await upload(image);
+      const newUser: CreateUserDto = { ...user, imageUrl: newFileUrl };
+
+      await register(newUser);
+      navigate("/login");
+    } catch (error) {
+      if (error instanceof AxiosError && error.status === 409) {
+        toast.error("User already exists");
+      } else {
+        toast.error("Failed to create user");
+      }
+    }
   };
 
   return (
     <div className={styles.container}>
       <Card className={styles.registerCard}>
-        <h1 className={styles.title}>New Account</h1>
+        <Title text="New Acoount" />
         <FormProvider {...form}>
           <RegisterForm />
         </FormProvider>

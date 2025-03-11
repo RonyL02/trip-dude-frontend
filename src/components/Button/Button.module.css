@@ -1,8 +1,8 @@
 .button {
-    background-color: lightcyan;
-    color: dimgray;
+    background-color: #6c5ce7;
+    color: white;
     padding: 15px;
-    border-radius: 40px;
+    border-radius: 5px;
     font-weight: 600;
     font-size: medium;
     cursor: pointer;

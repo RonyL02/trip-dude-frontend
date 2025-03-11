@@ -1,0 +1,35 @@
+.container{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.commentsContainer {
+  align-items: unset;
+}
+
+.commentInputContainer {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.commentInput {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.commentButton {
+  height: fit-content;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}

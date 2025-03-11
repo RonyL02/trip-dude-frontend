@@ -4,10 +4,14 @@ import { ImageField } from "../../../../components/forms/ImageField";
 export const RegisterForm = () => {
   return (
     <div className={styles.container}>
-      <FormInput name="email" type="email" />
-      <FormInput name="username" type="text" />
-      <FormInput name="password" type="password" />
-      <ImageField name="imageUrl" />
+      <div className={styles.formContainer}>
+        <FormInput name="email" type="email" />
+        <FormInput name="username" type="text" />
+        <FormInput name="password" type="password" />
+      </div>
+      <div className={styles.imageContainer}>
+        <ImageField name="image" defaultImgUrl="default-avatar.png" />
+      </div>
     </div>
   );
 };
