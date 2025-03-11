@@ -59,30 +59,32 @@ export const Comments: FC = () => {
   return postNotFound ? (
     <Title text="Post not found" />
   ) : (
-    <Card className={styles.commentsContainer}>
-      <Title text="Comments" />
-      <div className={styles.commentInputContainer}>
-        <FormProvider {...form}>
-          <div className={styles.commentInput}>
-            <FormInput name="content" placeholder="Write a comment..." />
-          </div>
-        </FormProvider>
-        <Button
-          className={styles.commentButton}
-          text="Add Comment"
-          onClick={form.handleSubmit(handleAddComment)}
-        />
-      </div>
-      <div className={styles.commentsList}>
-        {comments.map(({ content, username, _id, imageUrl }) => (
-          <CommentRow
-            key={_id}
-            content={content}
-            username={username}
-            imageUrl={imageUrl}
+    <div className={styles.container}>
+      <Card className={styles.commentsContainer}>
+        <Title text="Comments" />
+        <div className={styles.commentInputContainer}>
+          <FormProvider {...form}>
+            <div className={styles.commentInput}>
+              <FormInput name="content" placeholder="Write a comment..." />
+            </div>
+          </FormProvider>
+          <Button
+            className={styles.commentButton}
+            text="Add Comment"
+            onClick={form.handleSubmit(handleAddComment)}
           />
-        ))}
-      </div>
-    </Card>
+        </div>
+        <div className={styles.commentsList}>
+          {comments.map(({ content, username, _id, imageUrl }) => (
+            <CommentRow
+              key={_id}
+              content={content}
+              username={username}
+              imageUrl={imageUrl}
+            />
+          ))}
+        </div>
+      </Card>
+    </div>
   );
 };
