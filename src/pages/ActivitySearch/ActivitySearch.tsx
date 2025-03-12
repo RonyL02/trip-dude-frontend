@@ -15,6 +15,7 @@ import { Activity } from "../../api/types";
 import { ActivityCard } from "./components/ActivityCard";
 import { Title } from "../../components/Title";
 import { toast } from "react-toastify";
+import { Loader } from "../../components/Loader";
 export const ActivitySearch = () => {
   const form = useValidatedForm(activitySearchSchema);
   const [displayedActivities, setDisplayedActivities] = useState<
@@ -31,7 +32,7 @@ export const ActivitySearch = () => {
 
   const handleSaveActivity = async (activity: Activity) => {
     try {
-      await saveActivity(activity);
+      await saveActivity({ ...activity, picture: activity.pictures?.[0] });
       toast.success("Activity saved successfully");
     } catch {
       toast.error("Failed to save activity");
@@ -57,16 +58,19 @@ export const ActivitySearch = () => {
       </Card>
       <div className={styles.resultsContainer}>
         {isLoading ? (
-          <div className={styles.resultMessage}>Loading...</div>
+          <div className={styles.loader}>
+            <Loader width="120px" />
+          </div>
         ) : (
           <div className={styles.activityGrid}>
             {displayedActivities?.map((activity) => (
               <ActivityCard activity={activity} onSave={handleSaveActivity} />
-            )) ?? (
-              <div className={styles.resultMessage}>
-                No activity matches the criteria
-              </div>
-            )}
+            ))}
+          </div>
+        )}
+        {!displayedActivities?.length && !isLoading && (
+          <div className={styles.resultMessage}>
+            No activity matches the criteria
           </div>
         )}
       </div>

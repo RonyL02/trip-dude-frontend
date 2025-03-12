@@ -6,6 +6,7 @@ type Props = { activity: Activity; onSave: (activity: Activity) => void };
 
 export const ActivityCard: FC<Props> = ({ activity, onSave }) => {
   const [saved, setSaved] = useState(false);
+  const [imgSrc, setImgSrc] = useState(activity.pictures?.[0]);
   const handleSave = () => {
     onSave(activity);
     setSaved(true);
@@ -13,8 +14,9 @@ export const ActivityCard: FC<Props> = ({ activity, onSave }) => {
   return (
     <div className={styles.activityCard}>
       <img
-        src={activity?.pictures?.[0] ?? "/empty-300x240.jpg"}
+        src={imgSrc ?? "/empty-300x240.jpg"}
         className={styles.activityImage}
+        onError={() => setImgSrc("/empty-300x240.jpg")}
       />
       <h3>{activity.name}</h3>
       <h3>{activity.rating}</h3>

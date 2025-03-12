@@ -1,38 +1,36 @@
 import { useEffect, useState } from "react";
 import styles from "./Activity.module.css";
-import { fetchActivities } from "../../api/authApi";
+import { getActivityById } from "../../api/activityApi";
+import { useParams } from "react-router-dom";
+import { SavedActivityDto } from "../../api/types";
+import { toast } from "react-toastify";
+import { Title } from "../../components/Title";
+import { Card } from "../../components/Card/Card";
 
-interface Activity {
-  id: string;
-  name: string;
-  description: string;
-  image: string;
-  rating: string | number;
-  price: string | number;
-  bookingLink: string;
-}
-
-export const Activity = () => {
-  const [activity, setActivity] = useState<Activity | null>(null);
+export const ActivityPage = () => {
+  const { activityId } = useParams<{ activityId: string }>();
+  const [activity, setActivity] = useState<SavedActivityDto | null>(null);
   const [loading, setLoading] = useState(true);
+  const [imgSrc, setImgSrc] = useState<string | undefined>();
 
   useEffect(() => {
     const loadActivity = async () => {
       try {
-        const activities = await fetchActivities();
-        if (activities.length > 0) {
-          setActivity(activities[0]); 
+        const activity = await getActivityById(activityId!);
+        if (activity) {
+          setImgSrc(activity.picture);
+          setActivity(activity);
         } else {
-          console.warn("⚠️ No activities found.");
+          toast.warn("⚠️ No activities found.");
         }
-      } catch (error) {
-        console.error("❌ Error fetching activity:", error);
+      } catch {
+        toast.error("❌ Error fetching activity:");
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
     loadActivity();
-  }, []);
+  }, [activityId]);
 
   if (loading) {
     return <p className={styles.loading}>Loading activity...</p>;
@@ -43,14 +41,19 @@ export const Activity = () => {
   }
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.activityCard}>
-        <button className={styles.closeButton} onClick={() => setActivity(null)}>Close</button>
-        <h2 className={styles.activityTitle}>{activity.name}</h2>
-        <img src={activity.image} alt={activity.name} className={styles.image} />
-        <p className={styles.description}>{activity.description}</p>
+    <Card className={styles.overlay}>
+      <div>
+        <Title text={`${activity.name}`} />
+        <img
+          src={imgSrc ?? "/empty-300x240.jpg"}
+          className={styles.image}
+          onError={() => setImgSrc("/empty-300x240.jpg")}
+        />
         <p className={styles.details}>
-          ⭐ {activity.rating} | 💰 {activity.price} USD
+          {activity.rating ? `${activity.rating}⭐` : ""}
+          {activity.price?.amount && activity.price.currencyCode
+            ? `| ${activity.price?.amount}${activity.price.currencyCode}`
+            : ""}
         </p>
         <a
           href={activity.bookingLink}
@@ -58,9 +61,13 @@ export const Activity = () => {
           rel="noopener noreferrer"
           className={styles.bookingLink}
         >
-          Book Now
+          {activity.bookingLink ? "Book Now" : "Link notAvailable"}
         </a>
       </div>
-    </div>
+      <div>
+        <p className={styles.description}>{activity.shortDescription}</p>
+        <p className={styles.description}>{activity.description}</p>
+      </div>
+    </Card>
   );
 };

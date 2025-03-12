@@ -1,5 +1,5 @@
 import apiClient from "./apiClient";
-import { Activity } from "./types";
+import { Activity, SavedActivityDto } from "./types";
 
 const ACTIVITY_ROUTE = "/activities";
 
@@ -12,6 +12,10 @@ export const getActivities = async (location: string, description: string): Prom
     return (await apiClient.get(`${ACTIVITY_ROUTE}/`, { params: { location, description } })).data
 }
 
-export const saveActivity = async (activity: Activity): Promise<{ newId: string }> => {
+export const saveActivity = async (activity: SavedActivityDto): Promise<{ newId: string }> => {
     return (await apiClient.post(`${ACTIVITY_ROUTE}/`, activity)).data
+}
+
+export const getActivityById = async (id: string): Promise<SavedActivityDto> => {
+    return (await apiClient.get(`${ACTIVITY_ROUTE}/${id}`)).data
 }
