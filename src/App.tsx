@@ -10,6 +10,7 @@ import { UserProvider } from "./providers/UserProvider";
 import { CreatePost } from "./pages/CreatePost/CreatePost";
 import { Comments } from "./pages/Comments";
 import { ToastContainer } from "react-toastify";
+import { PostsFeed } from "./pages/PostsFeed";
 import { Navbar } from "./components/Navbar";
 import { ActivitySearch } from "./pages/ActivitySearch";
 import { ActivityPage } from "./pages/Activity";
@@ -24,6 +25,11 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/posts" element={<PostsFeed />} />
+            <Route
+              path="/comments/:postId"
+              element={<Comments />}
+            />
             <Route path="/comments/:postId" element={<Comments />} />
             <Route path="/activities" element={<ActivitySearch />} />
             <Route path="/activities/:activityId" element={<ActivityPage />} />

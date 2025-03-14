@@ -9,13 +9,13 @@ export const Navbar = () => {
       <nav className={styles.navbar}>
         <div className={styles.navbarTitle}>
           <span className={styles.navbarIcon}>🌍</span>
-          <span>Global Activities</span>
+          <span>Trip Dude</span>
         </div>
         <div className={styles.navbarLinks}>
           <Link to="/">Home</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/activities">Activities</Link>
-          <Link to="/explore">Explore</Link>
+          <Link to="/posts">Posts</Link>
         </div>
       </nav>
     )

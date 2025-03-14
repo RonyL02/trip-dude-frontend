@@ -46,10 +46,11 @@ export const Comments: FC = () => {
           _id: response.newId,
           content: schema.content,
           username: user!.username,
-          imageUrl: user!.imageUrl,
+          imageUrl: user?.imageUrl,
         },
         ...prev,
       ]);
+      form.resetField("content")
       toast.success("comment added successfully");
     } catch {
       toast.error("failed to add comment");
