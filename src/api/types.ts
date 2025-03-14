@@ -39,3 +39,5 @@ export type Activity = {
     bookingLink?: string;
     minimumDuration?: string;
 };
+
+export type SavedActivityDto = Omit<Activity, 'pictures'> & { picture?: string }

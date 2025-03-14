@@ -50,3 +50,17 @@
     padding: 10px;
     justify-items: center;
 }
+
+.resultMessage {
+    text-align: center;
+    position: relative;
+    margin-top: 20%;
+    font-size: larger;
+}
+
+.loader{
+    text-align: center;
+    position: relative;
+    margin-top: 20%;
+    font-size: larger;
+}

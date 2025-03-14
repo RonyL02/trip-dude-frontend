@@ -10,13 +10,13 @@ export const LocationSearch: FC = () => {
   const [loading, setLoading] = useState(false);
   const [chosen, setChosen] = useState(false);
   useEffect(() => {
-    setChosen(false);
-
-    if (query.length < 2) {
+    
+    if (query.length < 2 || chosen) {
       setSuggestions([]);
       return;
     }
-
+    
+    setChosen(false);
     const fetchSuggestions = async () => {
       setLoading(true);
       try {
@@ -31,17 +31,19 @@ export const LocationSearch: FC = () => {
 
     const timer = setTimeout(fetchSuggestions, 300);
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [query,chosen]);
 
   useEffect(() => {
     if (chosen) {
       setSuggestions([]);
+      setLoading(false)
     }
   }, [chosen]);
 
   const handleInputChange = (input: string) => {
     setQuery(input);
     setValue("location", input);
+    setChosen(false)
   };
 
   return (

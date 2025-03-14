@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "react-toastify/ReactToastify.css";
+import 'reactjs-popup/dist/index.css';
+
 import { Login } from "./pages/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Register } from "./pages/Register";
@@ -10,6 +12,7 @@ import { Comments } from "./pages/Comments";
 import { ToastContainer } from "react-toastify";
 import { Navbar } from "./components/Navbar";
 import { ActivitySearch } from "./pages/ActivitySearch";
+import { ActivityPage } from "./pages/Activity";
 
 const App = () => {
   return (
@@ -23,6 +26,7 @@ const App = () => {
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/comments/:postId" element={<Comments />} />
             <Route path="/activities" element={<ActivitySearch />} />
+            <Route path="/activities/:activityId" element={<ActivityPage />} />
           </Routes>
         </UserProvider>
       </BrowserRouter>
