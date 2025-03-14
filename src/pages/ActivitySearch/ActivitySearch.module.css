@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.locationSearchContainer {
+    width: 30%;
+    gap: 15px;
+}
+
+.textArea {
+    position: relative;
+    padding: 15px;
+    font-size: larger;
+}
+
+.textArea:focus {
+    border-color: #615e5e;
+}
+
+.searchButtonContainer {
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.searchButton {
+    position: unset;
+}
+
+.searchButton:hover {
+    background-color: rgb(86, 51, 129);
+}
+
+.resultsContainer {
+    height: 80vh;
+    overflow: auto;
+    overflow-x: hidden;
+    width: 70%;
+}
+
+
+.activityGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    justify-items: center;
+}
+
+.resultMessage {
+    text-align: center;
+    position: relative;
+    margin-top: 20%;
+    font-size: larger;
+}
+
+.loader{
+    text-align: center;
+    position: relative;
+    margin-top: 20%;
+    font-size: larger;
+}
