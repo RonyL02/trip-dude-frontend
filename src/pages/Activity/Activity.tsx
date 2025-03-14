@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./Activity.module.css";
 import { getActivityById } from "../../api/activityApi";
 import { useParams } from "react-router-dom";
-import { SavedActivityDto } from "../../api/types";
+import { Activity, SavedActivityDto } from "../../api/types";
 import { toast } from "react-toastify";
 import { Title } from "../../components/Title";
 import { Card } from "../../components/Card/Card";
 
-export const ActivityPage = () => {
-  const { activityId } = useParams<{ activityId: string }>();
+type Props = {
+  activity?: Activity;
+};
+
+export const ActivityPage: FC<Props> = ({ activity: activityProp }) => {
+  const { activityId } = useParams<{ activityId?: string }>();
   const [activity, setActivity] = useState<SavedActivityDto | null>(null);
   const [loading, setLoading] = useState(true);
   const [imgSrc, setImgSrc] = useState<string | undefined>();
@@ -29,10 +33,14 @@ export const ActivityPage = () => {
         setLoading(false);
       }
     };
-    loadActivity();
-  }, [activityId]);
+    if (activityId) {
+      loadActivity();
+    } else {
+      setActivity(activityProp!);
+    }
+  }, [activityId, activityProp]);
 
-  if (loading) {
+  if (loading && !activity) {
     return <p className={styles.loading}>Loading activity...</p>;
   }
 

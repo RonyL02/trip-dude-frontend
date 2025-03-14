@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "react-toastify/ReactToastify.css";
+import 'reactjs-popup/dist/index.css';
+
 import { Login } from "./pages/Login";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Register } from "./pages/Register";

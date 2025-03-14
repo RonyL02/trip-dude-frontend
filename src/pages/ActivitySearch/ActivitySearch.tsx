@@ -22,11 +22,15 @@ export const ActivitySearch = () => {
     Activity[] | null
   >(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [resultMessage, setResultMessage] = useState(
+    "Tell us what you are looking for...🔍"
+  );
   const handleSearchActivities = async (schema: ActivitySearchSchemaType) => {
     setIsLoading(true);
     const activities = await getActivities(schema.location, schema.description);
     setDisplayedActivities(activities);
     toast.success(activities.length);
+    setResultMessage("No activity matches the criteria")
     setIsLoading(false);
   };
 
@@ -70,7 +74,7 @@ export const ActivitySearch = () => {
         )}
         {!displayedActivities?.length && !isLoading && (
           <div className={styles.resultMessage}>
-            No activity matches the criteria
+            {resultMessage}
           </div>
         )}
       </div>
