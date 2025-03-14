@@ -12,6 +12,7 @@ export const CommentRow: FC<Props> = ({ content, imageUrl, username }) => {
       <img
         className={styles.commentAvatar}
         src={imageUrl ?? "/default-avatar.png"}
+        loading="lazy"
       />
       <div className={styles.commentContent}>
         <span className={styles.commentUsername}>{username}</span>

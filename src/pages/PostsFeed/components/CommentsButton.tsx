@@ -1,19 +1,21 @@
 import React from "react";
-import styles from "./CommentsButton.module.css";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../../../components/Button";
 
 interface CommentsButtonProps {
   postId: string;
-  commentsCount: number;
 }
 
-const CommentsButton: React.FC<CommentsButtonProps> = ({ postId, commentsCount }) => {
+const CommentsButton: React.FC<CommentsButtonProps> = ({
+  postId,
+}) => {
   const navigate = useNavigate();
 
   return (
-    <button className={styles.commentsButton} onClick={() => navigate(`/comments/${postId}`)}>
-      Comments {commentsCount}
-    </button>
+    <Button
+      onClick={() => navigate(`/comments/${postId}`)}
+      text="Comments"
+    />
   );
 };
 

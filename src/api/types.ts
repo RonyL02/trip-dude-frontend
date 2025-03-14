@@ -11,6 +11,7 @@ export type User = {
     username: string;
     imageUrl?: string;
     _id: string
+    likedPosts: string[]
 }
 
 export type Comment = {
@@ -41,3 +42,11 @@ export type Activity = {
 };
 
 export type SavedActivityDto = Omit<Activity, 'pictures'> & { picture?: string }
+export type Post = {
+    _id: string;
+    imageUrl: string;
+    description: string;
+    likes: number;
+    commentsCount: number;
+    activityId: string;
+};

@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./PostsFeed.module.css";
-import apiClient from "../../api/apiClient";
-import {PostItem } from "./components";
-
-
-interface Post {
-  id: string;
-  imageUrl: string;
-  description: string;
-  likes: number;
-  activityType: string;
-  commentsCount: number;
-}
+import { PostItem } from "./components";
+import { getPosts } from "../../api/postApi";
+import { toast } from "react-toastify";
+import { Title } from "../../components/Title";
+import { Post } from "../../api/types";
 
 const PostsFeed: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -19,10 +12,10 @@ const PostsFeed: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await apiClient.get("/posts");
-        setPosts(response.data);
-      } catch (error) {
-        console.error("Failed to fetch posts", error);
+        const postsResult = await getPosts();
+        setPosts(postsResult);
+      } catch {
+        toast.error("Failed to fetch posts");
       }
     };
     fetchPosts();
@@ -30,10 +23,10 @@ const PostsFeed: React.FC = () => {
 
   return (
     <div className={styles.postsFeedContainer}>
-      <h2 className={styles.title}>Posts Feed</h2>
+      <Title text="Posts" />
       <div className={styles.postsList}>
         {posts.map((post) => (
-          <PostItem key={post.id} post={post} />
+          <PostItem key={post._id} post={post} />
         ))}
       </div>
     </div>
