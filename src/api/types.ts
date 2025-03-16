@@ -5,7 +5,7 @@ export type CreateUserDto = {
     username: string
 }
 
-export type CreatePostDto = { description: string; imageUrl: string }
+export type CreatePostDto = { description: string; imageUrl: string, activityId: string }
 
 export type User = {
     username: string;

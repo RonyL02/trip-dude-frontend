@@ -10,3 +10,7 @@ export const getProfile = async (): Promise<User> => {
 export const updateProfile = (user: Partial<User>) => {
     return apiClient.patch(USER_ROUTE, user)
 }
+
+export const getUserById = async (id: string): Promise<User> => {
+    return (await apiClient.get(`${USER_ROUTE}/${id}`)).data
+}

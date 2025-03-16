@@ -23,8 +23,16 @@ export const Login = () => {
     credentialResponse: CredentialResponse
   ) => {
     try {
-      const user = await loginWithGoogle(credentialResponse?.credential ?? "");
+      await loginWithGoogle(credentialResponse?.credential ?? "");
+      const user = await getProfile();
+      const activities = await getSavedActivities();
+
+      setUser({
+        ...user,
+        activities,
+      });
       setUser(user);
+      navigate("/profile");
     } catch {
       toast.error("Failed to login with Google");
     }

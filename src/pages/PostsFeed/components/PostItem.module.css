@@ -1,50 +1,61 @@
 .postCard {
-    align-items: unset;
-  }
-  
-  .postImage {
-    width: 600px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-    align-self: center;
-    object-fit: contain;
-  }
-  
-  .postContent {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .description {
-    font-size: 16px;
-    margin-bottom: 50px;
-    align-self: flex-start;
-  }
-  
-  .postInfo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .likes {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .likeIcon {
-    color: red;
-    cursor: pointer;
-  }
-  
-  .comments {
-    cursor: pointer;
-    text-decoration: underline;
-    color: blue;
-  }
-  
+  align-items: unset;
+}
+
+.postImage {
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  align-self: center;
+  object-fit: contain;
+}
+
+.postContent {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 50px;
+  align-self: flex-start;
+}
+
+.postInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.uploader{
+  display: flex;
+  gap:30px;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.likeIcon {
+  color: red;
+  cursor: pointer;
+}
+
+.comments {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+
+
+.avatar {
+  width: 30px;
+}

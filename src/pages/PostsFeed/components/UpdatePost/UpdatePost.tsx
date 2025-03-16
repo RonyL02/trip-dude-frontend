@@ -13,9 +13,10 @@ import { FC } from "react";
 
 type Props = {
   post: Post;
+  onAfterSave: (post: Post) => void;
 };
 
-export const UpdatePost: FC<Props> = ({ post }) => {
+export const UpdatePost: FC<Props> = ({ post, onAfterSave }) => {
   const form = useValidatedForm(updatePostSchema, {
     description: post.description,
   });
@@ -23,7 +24,7 @@ export const UpdatePost: FC<Props> = ({ post }) => {
   const handleUpdate = async (schema: UpdatePostSchemaType) => {
     const { image, ...postData } = schema;
     let newFileUrl: string | undefined;
-    if (image) {
+    if (image instanceof File) {
       newFileUrl = (await upload(image)).newFileUrl;
     }
     const updatedPost: Partial<CreatePostDto> = {
@@ -34,6 +35,8 @@ export const UpdatePost: FC<Props> = ({ post }) => {
     await updatePost(post._id, updatedPost);
     form.reset(form.getValues());
     toast.success("Post Updated Successfully");
+    const displayedPost = { ...post, ...updatedPost };
+    onAfterSave(displayedPost);
   };
 
   return (
@@ -44,7 +47,7 @@ export const UpdatePost: FC<Props> = ({ post }) => {
         </FormProvider>
         <Button
           className={styles.button}
-          text="Update Post"
+          text="Save"
           disabled={
             Object.values(form.formState.touchedFields).filter(Boolean)
               .length === 0

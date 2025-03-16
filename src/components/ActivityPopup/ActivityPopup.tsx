@@ -24,7 +24,7 @@ export const ActivityPopup: FC<Props> = ({ activity }) => {
       }}
       trigger={
         <Button
-          text="View Full Details"
+          text="View Activity Details"
           className={`${styles.detailsButton}`}
         />
       }
@@ -36,7 +36,7 @@ export const ActivityPopup: FC<Props> = ({ activity }) => {
     >
       <Button
         text="X"
-        style={{ backgroundColor: "red", borderRadius: '100%' }}
+        style={{ backgroundColor: "red", borderRadius: "100%" }}
         onClick={() => popupRef.current?.close()}
       />
       <ActivityPage activity={activity} />

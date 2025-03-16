@@ -21,6 +21,10 @@ export const ActivitiesList: FC<Props> = ({ activities }) => {
     setDisplayedActivities((prev) => prev.filter(({ _id }) => _id !== id));
     toast.success("Activity was removed");
   };
+
+  const handleGoToCreatePost = (id: string) => {
+    navigate(`/create-post/${id}`);
+  };
   return (
     <Card className={styles.activitiesContainer}>
       <Title text="My Saved Activities" />
@@ -30,6 +34,10 @@ export const ActivitiesList: FC<Props> = ({ activities }) => {
             <Card key={activity.id}>
               <h3>{activity.name}</h3>
               <div className={styles.buttonList}>
+                <Button
+                  text="Post"
+                  onClick={() => handleGoToCreatePost(activity._id!)}
+                />
                 <ActivityPopup activity={activity} />
                 <Button
                   text="Unsave"

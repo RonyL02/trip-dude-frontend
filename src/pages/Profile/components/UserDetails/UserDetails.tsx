@@ -28,8 +28,7 @@ export const UserDetails: FC<Props> = ({ user }) => {
   const handleUserUpdate = async (schema: UserDetailsSchema) => {
     const { image, ...user } = schema;
     let newFileUrl: string | undefined;
-    if (image) {
-
+    if (image instanceof File) {
       newFileUrl = (await upload(image)).newFileUrl;
     }
     const updatedUser: Partial<CreateUserDto> = {
@@ -48,9 +47,7 @@ export const UserDetails: FC<Props> = ({ user }) => {
     navigate("login");
   };
 
-
   const goToMyPosts = () => {
-    
     navigate("my-posts");
   };
 
@@ -71,10 +68,7 @@ export const UserDetails: FC<Props> = ({ user }) => {
         }
         onClick={form.handleSubmit(handleUserUpdate)}
       />
-      <Button
-        text="My Posts"
-        onClick={goToMyPosts}
-      />
+      <Button text="My Posts" onClick={goToMyPosts} />
       <Button
         text="Logout"
         className={styles.logoutButton}

@@ -7,11 +7,16 @@ import { Button } from "../../../../components/Button";
 import { UpdatePost } from "../UpdatePost/UpdatePost";
 type Props = {
   post: Post;
+  onAfterSave: (post: Post) => void;
 };
 
-export const UpdatePostPopup: FC<Props> = ({ post }) => {
+export const UpdatePostPopup: FC<Props> = ({ post, onAfterSave }) => {
   const popupRef = useRef<PopupActions>();
 
+  const closePopup = (post: Post) => {
+    onAfterSave(post);
+    popupRef.current?.close();
+  };
   return (
     <Popup
       lockScroll
@@ -22,12 +27,7 @@ export const UpdatePostPopup: FC<Props> = ({ post }) => {
         borderRadius: 10,
         scrollbarWidth: "none",
       }}
-      trigger={
-        <Button
-          text="Edit"
-          className={`${styles.detailsButton}`}
-        />
-      }
+      trigger={<Button text="Edit" className={`${styles.detailsButton}`} />}
       modal
       closeOnEscape
       closeOnDocumentClick
@@ -39,7 +39,7 @@ export const UpdatePostPopup: FC<Props> = ({ post }) => {
         style={{ backgroundColor: "red", borderRadius: "100%" }}
         onClick={() => popupRef.current?.close()}
       />
-      <UpdatePost post={post} />
+      <UpdatePost post={post} onAfterSave={closePopup} />
     </Popup>
   );
 };
