@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./PostsFeed.module.css";
 import { PostItem } from "./components";
-import { getPosts } from "../../api/postApi";
+import { deletePost, getPosts } from "../../api/postApi";
 import { toast } from "react-toastify";
 import { Title } from "../../components/Title";
 import { Post } from "../../api/types";
@@ -36,12 +36,27 @@ const PostsFeed: React.FC = () => {
     }
   }, [user, isMyPosts]);
 
+  const handleDelete = async (id: string) => {
+    try {
+      await deletePost(id);
+      setPosts((prev) => prev.filter(({ _id }) => _id !== id));
+      toast.success("Post was deleted successfully");
+    } catch {
+      toast.error("Failed to delete post");
+    }
+  };
+
   return (
     <div className={styles.postsFeedContainer}>
       <Title text={isMyPosts ? "My Posts" : "Posts"} />
       <div className={styles.postsList}>
         {posts.map((post) => (
-          <PostItem key={post._id} post={post} isMyPosts={isMyPosts} />
+          <PostItem
+            key={post._id}
+            post={post}
+            isMyPosts={isMyPosts}
+            onDelete={handleDelete}
+          />
         ))}
       </div>
     </div>

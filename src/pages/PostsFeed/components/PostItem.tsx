@@ -8,13 +8,19 @@ import { UpdatePostPopup } from "./UpdatePostPopup/ActivityPopup";
 import { getUserById } from "../../../api/userApi";
 import { ActivityPopup } from "../../../components/ActivityPopup/ActivityPopup";
 import { getActivityById } from "../../../api/activityApi";
+import { MdDelete } from "react-icons/md";
 
 interface PostProps {
   post: Post;
   isMyPosts?: boolean;
+  onDelete: (postId: string) => void;
 }
 
-export const PostItem: React.FC<PostProps> = ({ post, isMyPosts = false }) => {
+export const PostItem: React.FC<PostProps> = ({
+  post,
+  onDelete,
+  isMyPosts = false,
+}) => {
   const [displayedPost, setDisplayedPost] = useState(post);
   const [imgSrc, setImgSrc] = useState<string | undefined>(
     displayedPost.imageUrl
@@ -73,11 +79,13 @@ export const PostItem: React.FC<PostProps> = ({ post, isMyPosts = false }) => {
               onAfterSave={handleAfterUpdate}
             />
           )}
-          <div>{activity && <ActivityPopup activity={activity} />}</div>
-
-          <div className={styles.activity}>
-            <CommentsButton postId={displayedPost._id} />
-          </div>
+          {activity && <ActivityPopup activity={activity} />}
+          <MdDelete
+            size={60}
+            style={{ cursor: "pointer" }}
+            onClick={() => onDelete(post._id)}
+          />
+          <CommentsButton postId={displayedPost._id} />
         </div>
       </div>
     </Card>

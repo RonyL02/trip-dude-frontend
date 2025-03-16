@@ -19,3 +19,6 @@ export const updatePost = (postId: string, post: Partial<CreatePostDto>) => {
     return apiClient.patch(`${POSTS_ROUTE}/${postId}`, post);
 }
 
+export const deletePost = (id: string) => {
+    return apiClient.delete(`${POSTS_ROUTE}/${id}`)
+}
