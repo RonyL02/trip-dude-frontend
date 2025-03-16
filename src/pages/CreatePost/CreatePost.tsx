@@ -15,7 +15,6 @@ export const CreatePost = () => {
   const form = useValidatedForm(createPostSchema);
 
   const handleCreatePost = async (schema: CreatePostSchemaType) => {
-    console.log("response");
     try {
       const { description, image } = schema;
       const { newFileUrl } = await upload(image);
@@ -24,8 +23,7 @@ export const CreatePost = () => {
         imageUrl: newFileUrl,
       };
 
-      const response = await createPost(newPost);
-      console.log(response);
+      await createPost(newPost);
 
       toast.success("Post created successfully");
     } catch {

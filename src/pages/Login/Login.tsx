@@ -11,6 +11,8 @@ import { Card } from "../../components/Card/Card";
 import { useUser } from "../../providers/UserProvider";
 import { toast } from "react-toastify";
 import { Title } from "../../components/Title";
+import { getProfile } from "../../api/userApi";
+import { getSavedActivities } from "../../api/activityApi";
 
 export const Login = () => {
   const form = useValidatedForm(loginSchema);
@@ -30,8 +32,16 @@ export const Login = () => {
 
   const handleLogin = async (schema: LoginSchemaType) => {
     try {
-      const user = await login(schema.email, schema.password);
+      await login(schema.email, schema.password);
+      const user = await getProfile();
+      const activities = await getSavedActivities();
+
+      setUser({
+        ...user,
+        activities,
+      });
       setUser(user);
+      navigate("/profile");
     } catch {
       toast.error("Invalid credentials or user does not exist");
     }
@@ -40,7 +50,7 @@ export const Login = () => {
   return (
     <div className={styles.container}>
       <Card>
-        <Title text="Welcome to TripDude"/>
+        <Title text="Welcome to TripDude" />
         <FormProvider {...form}>
           <LoginForm />
         </FormProvider>

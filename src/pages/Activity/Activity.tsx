@@ -37,6 +37,7 @@ export const ActivityPage: FC<Props> = ({ activity: activityProp }) => {
       loadActivity();
     } else {
       setActivity(activityProp!);
+      setImgSrc(activityProp?.pictures?.[0]);
     }
   }, [activityId, activityProp]);
 
@@ -73,8 +74,14 @@ export const ActivityPage: FC<Props> = ({ activity: activityProp }) => {
         </a>
       </div>
       <div>
-        <p className={styles.description}>{activity.shortDescription}</p>
-        <p className={styles.description}>{activity.description}</p>
+        <p
+          className={styles.description}
+          dangerouslySetInnerHTML={{ __html: activity.shortDescription ?? "" }}
+        />
+        <p
+          className={styles.description}
+          dangerouslySetInnerHTML={{ __html: activity.description ?? "" }}
+        />
       </div>
     </Card>
   );

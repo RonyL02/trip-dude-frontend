@@ -12,6 +12,7 @@ export type User = {
     imageUrl?: string;
     _id: string
     likedPosts: string[]
+    activities: SavedActivityDto[];
 }
 
 export type Comment = {
@@ -41,9 +42,10 @@ export type Activity = {
     minimumDuration?: string;
 };
 
-export type SavedActivityDto = Omit<Activity, 'pictures'> & { picture?: string }
+export type SavedActivityDto = Omit<Activity, 'pictures'> & { picture?: string, _id?: string }
 export type Post = {
     _id: string;
+    userId: string;
     imageUrl: string;
     description: string;
     likes: number;

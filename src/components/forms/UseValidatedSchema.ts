@@ -1,8 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { ZodObject, ZodRawShape } from "zod";
+import { DefaultValues, useForm } from "react-hook-form";
+import { ZodObject, ZodRawShape, z } from "zod";
 
-export const useValidatedForm = <SchemaType extends ZodRawShape>(schema: ZodObject<SchemaType>) => {
-    const form = useForm({ resolver: zodResolver(schema) })
-    return form
-}
+export const useValidatedForm = <SchemaType extends ZodRawShape>(
+    schema: ZodObject<SchemaType>,
+    defaultValues?: DefaultValues<z.infer<typeof schema>>
+) => {
+    const form = useForm<z.infer<typeof schema>>({
+        resolver: zodResolver(schema),
+        defaultValues,
+    });
+
+    return form;
+};

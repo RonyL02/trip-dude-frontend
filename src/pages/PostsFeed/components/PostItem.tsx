@@ -4,12 +4,14 @@ import CommentsButton from "./CommentsButton";
 import { Post } from "../../../api/types";
 import { Card } from "../../../components/Card/Card";
 import { LikeButton } from "./LikeButton";
+import { UpdatePostPopup } from "./UpdatePostPopup/ActivityPopup";
 
 interface PostProps {
   post: Post;
+  isMyPosts?: boolean;
 }
 
-export const PostItem: React.FC<PostProps> = ({ post }) => {
+export const PostItem: React.FC<PostProps> = ({ post, isMyPosts = false }) => {
   const [imgSrc, setImgSrc] = useState<string | undefined>(post.imageUrl);
 
   return (
@@ -23,10 +25,9 @@ export const PostItem: React.FC<PostProps> = ({ post }) => {
         <p className={styles.description}>{post.description}</p>
         <div className={styles.postInfo}>
           <LikeButton postId={post._id} initialLikes={post.likes} />
+          {isMyPosts && <UpdatePostPopup post={post} />}
           <div className={styles.activity}>
-            <CommentsButton
-              postId={post._id}
-            />
+            <CommentsButton postId={post._id} />
           </div>
         </div>
       </div>

@@ -6,7 +6,12 @@ type Props = {
 
 export const Button: FC<Props> = ({ text, className, ...props }) => {
   return (
-    <button className={`${styles.button} ${className}`} {...props}>
+    <button
+      className={`${styles.button} ${className} ${
+        props.disabled ? styles.disabledButton : ""
+      }`}
+      {...props}
+    >
       {text}
     </button>
   );

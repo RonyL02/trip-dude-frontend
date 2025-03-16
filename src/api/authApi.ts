@@ -14,3 +14,6 @@ export const register = async (user: CreateUserDto): Promise<{ newId: string }> 
   return (await apiClient.post(`${AUTH_ROUTE}/register`, user)).data
 }
 
+export const logout = () => {
+  return apiClient.post(`${AUTH_ROUTE}/logout`)
+}

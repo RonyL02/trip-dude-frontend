@@ -11,7 +11,7 @@ import { User } from "../api/types";
 import Cookies from "js-cookie";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getProfile } from "../api/userApi";
-import { toast } from "react-toastify";
+import { getSavedActivities } from "../api/activityApi";
 
 type UserContextState = {
   user: User | null;
@@ -32,6 +32,20 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
   const refreshToken = Cookies.get("refresh_token");
 
   useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await getProfile();
+        const activities = await getSavedActivities();
+
+        setUser({
+          ...user,
+          activities,
+        });
+      } catch {
+        navigate("/login");
+      }
+    };
+
     const publicRoutes = ["/login", "/register"];
 
     if (
@@ -43,12 +57,7 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
     }
 
     if (!publicRoutes.includes(location.pathname)) {
-      getProfile()
-        .then((result) => setUser(result))
-        .catch(() => {
-          toast.error("something went wrong");
-          navigate("/login");
-        });
+      fetchUser();
     }
   }, [refreshToken, accessToken, navigate, location.pathname]);
 
