@@ -1,5 +1,6 @@
 .activitiesContainer {
     justify-content: space-between;
+    flex-grow: 1;
     height: 80vh;
 }
 

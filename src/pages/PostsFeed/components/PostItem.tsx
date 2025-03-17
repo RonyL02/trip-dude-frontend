@@ -80,11 +80,13 @@ export const PostItem: React.FC<PostProps> = ({
             />
           )}
           {activity && <ActivityPopup activity={activity} />}
-          <MdDelete
-            size={60}
-            style={{ cursor: "pointer" }}
-            onClick={() => onDelete(post._id)}
-          />
+          {isMyPosts && (
+            <MdDelete
+              size={60}
+              style={{ cursor: "pointer" }}
+              onClick={() => onDelete(post._id)}
+            />
+          )}
           <CommentsButton postId={displayedPost._id} />
         </div>
       </div>

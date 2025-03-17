@@ -56,7 +56,7 @@ export const UserDetails: FC<Props> = ({ user }) => {
       <FormProvider {...form}>
         <ImageField
           name="image"
-          defaultImgUrl={user?.imageUrl ?? "default-avatar.png"}
+          defaultImgUrl={user?.imageUrl ?? "/default-avatar.png"}
         />
         <FormInput name="username" type="text" />
       </FormProvider>
