@@ -30,7 +30,12 @@ export const LikeButton: FC<LikeButtonProps> = ({ postId, initialLikes }) => {
 
   return (
     <button className={styles.likeButton} onClick={handleLike}>
-      <FaHeart className={liked ? styles.liked : styles.notLiked} /> {likes}
+      <FaHeart
+        style={{ cursor: "pointer" }}
+        size={30}
+        className={liked ? styles.liked : styles.notLiked}
+      />
+      <h2 color="#555">{likes.toString()}</h2>
     </button>
   );
 };

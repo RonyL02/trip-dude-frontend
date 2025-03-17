@@ -14,3 +14,11 @@ export const getPosts = async (query: Partial<Post> = {}): Promise<Post[]> => {
 export const likePost = (postId: string) => {
     return apiClient.post(`${POSTS_ROUTE}/${postId}/like`);
 }
+
+export const updatePost = (postId: string, post: Partial<CreatePostDto>) => {
+    return apiClient.patch(`${POSTS_ROUTE}/${postId}`, post);
+}
+
+export const deletePost = (id: string) => {
+    return apiClient.delete(`${POSTS_ROUTE}/${id}`)
+}

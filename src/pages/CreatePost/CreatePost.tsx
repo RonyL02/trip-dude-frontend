@@ -10,22 +10,23 @@ import { upload } from "../../api/fileApi";
 import { CreatePostDto } from "../../api/types";
 import { CreatePostForm } from "./components/CreatePostForm";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 export const CreatePost = () => {
   const form = useValidatedForm(createPostSchema);
+  const { activityId } = useParams<{ activityId: string }>();
 
   const handleCreatePost = async (schema: CreatePostSchemaType) => {
-    console.log("response");
     try {
       const { description, image } = schema;
       const { newFileUrl } = await upload(image);
       const newPost: CreatePostDto = {
         description,
         imageUrl: newFileUrl,
+        activityId: activityId!,
       };
 
-      const response = await createPost(newPost);
-      console.log(response);
+      await createPost(newPost);
 
       toast.success("Post created successfully");
     } catch {

@@ -12,7 +12,6 @@ export const Navbar = () => {
           <span>Trip Dude</span>
         </div>
         <div className={styles.navbarLinks}>
-          <Link to="/">Home</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/activities">Activities</Link>
           <Link to="/posts">Posts</Link>

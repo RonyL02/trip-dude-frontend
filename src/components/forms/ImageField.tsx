@@ -16,7 +16,7 @@ export const imageSchema = z
     return file?.size ?? 0 <= MAX_FILE_SIZE;
   }, `Max image size is 5MB.`)
   .refine((file) => {
-    return file.type ? ACCEPTED_IMAGE_MIME_TYPES.includes(file?.type) : true;
+    return file?.type ? ACCEPTED_IMAGE_MIME_TYPES.includes(file?.type) : true;
   }, "Only .jpg, .jpeg, .png and .webp formats are supported.");
 
 export const ImageField: FC<Props> = ({
@@ -33,7 +33,10 @@ export const ImageField: FC<Props> = ({
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setValue(name, file);
+      setValue(name, file instanceof FileList ? null : file, {
+        shouldDirty: true,
+        shouldTouch: true,
+      });
       setImage(URL.createObjectURL(file));
     }
   };

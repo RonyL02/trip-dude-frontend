@@ -7,9 +7,18 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use((config) => {
     const accessToken = Cookies.get("access_token");
-    if (accessToken) {
+    const refreshToken = Cookies.get("refresh_token");
+
+    if (config.url?.includes("logout") && (refreshToken)) {
+        Cookies.remove("access_token")
+        Cookies.remove("refresh_token")
+        config.headers.Authorization = `Bearer ${refreshToken}`;
+    }
+    else if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
     }
+
+
     return config;
 });
 

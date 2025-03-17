@@ -5,13 +5,14 @@ export type CreateUserDto = {
     username: string
 }
 
-export type CreatePostDto = { description: string; imageUrl: string }
+export type CreatePostDto = { description: string; imageUrl: string, activityId: string }
 
 export type User = {
     username: string;
     imageUrl?: string;
     _id: string
     likedPosts: string[]
+    activities: SavedActivityDto[];
 }
 
 export type Comment = {
@@ -41,9 +42,10 @@ export type Activity = {
     minimumDuration?: string;
 };
 
-export type SavedActivityDto = Omit<Activity, 'pictures'> & { picture?: string }
+export type SavedActivityDto = Omit<Activity, 'pictures'> & { picture?: string, _id?: string }
 export type Post = {
     _id: string;
+    userId: string;
     imageUrl: string;
     description: string;
     likes: number;

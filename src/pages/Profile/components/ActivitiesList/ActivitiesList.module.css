@@ -1,0 +1,23 @@
+.activitiesContainer {
+    justify-content: space-between;
+    flex-grow: 1;
+    height: 80vh;
+}
+
+.activitiesList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto;
+    padding: 10px;
+    height: 90%;
+}
+
+.searchActivitieButton {
+    justify-self: flex-end;
+}
+
+.buttonList {
+    display: flex;
+    gap: 10px;
+}

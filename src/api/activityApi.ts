@@ -19,3 +19,11 @@ export const saveActivity = async (activity: SavedActivityDto): Promise<{ newId:
 export const getActivityById = async (id: string): Promise<SavedActivityDto> => {
     return (await apiClient.get(`${ACTIVITY_ROUTE}/${id}`)).data
 }
+
+export const getSavedActivities = async (): Promise<SavedActivityDto[]> => {
+    return (await apiClient.get(`${ACTIVITY_ROUTE}/saved`)).data
+}
+
+export const deleteSavedActivity = (id: string) => {
+    return apiClient.delete(`${ACTIVITY_ROUTE}/${id}`)
+}
