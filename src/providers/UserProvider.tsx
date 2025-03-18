@@ -39,7 +39,7 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
 
         setUser({
           ...user,
-          activities,
+          populatedActivities: activities,
         });
       } catch {
         navigate("/");

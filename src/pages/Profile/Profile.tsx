@@ -9,7 +9,7 @@ export const Profile = () => {
     user && (
       <div className={styles.profileContainer}>
         <UserDetails user={user} />
-        <ActivitiesList activities={user.activities} />
+        <ActivitiesList activities={user.populatedActivities} />
       </div>
     )
   );

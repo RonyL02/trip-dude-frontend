@@ -29,7 +29,7 @@ export const Login = () => {
 
       setUser({
         ...user,
-        activities,
+        populatedActivities: activities,
       });
       setUser(user);
       navigate("/profile");
@@ -46,7 +46,7 @@ export const Login = () => {
 
       setUser({
         ...user,
-        activities,
+        populatedActivities: activities,
       });
       setUser(user);
       navigate("/profile");
