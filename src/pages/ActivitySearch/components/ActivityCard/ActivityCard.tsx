@@ -40,15 +40,15 @@ export const ActivityCard: FC<Props> = ({ activity, onSave }) => {
         text="Save"
         className={`${styles.saveButton} ${
           (saved ||
-            user?.activities.find(
-              (activityId) => activityId === activity.id
+            user?.populatedActivities.find(
+              ({id}) => id === activity.id
             )) &&
           styles.savedButton
         }`}
         disabled={
           !!(
             saved ||
-            user?.activities.find((activityId) => activityId === activity.id)
+            user?.populatedActivities.find(({id}) => id === activity.id)
           )
         }
         onClick={handleSave}
