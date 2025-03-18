@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./PostItem.module.css";
 import CommentsButton from "./CommentsButton";
-import { Activity, Post, User } from "../../../api/types";
+import { Post, SavedActivityDto, User } from "../../../api/types";
 import { Card } from "../../../components/Card/Card";
 import { LikeButton } from "./LikeButton";
 import { UpdatePostPopup } from "./UpdatePostPopup/ActivityPopup";
@@ -25,7 +25,7 @@ export const PostItem: React.FC<PostProps> = ({
   const [imgSrc, setImgSrc] = useState<string | undefined>(
     displayedPost.imageUrl
   );
-  const [activity, setActivity] = useState<Activity>();
+  const [activity, setActivity] = useState<SavedActivityDto>();
   const [uploader, setUploader] = useState<User | undefined>();
 
   useEffect(() => {
@@ -79,7 +79,6 @@ export const PostItem: React.FC<PostProps> = ({
               onAfterSave={handleAfterUpdate}
             />
           )}
-          {activity && <ActivityPopup activity={activity} />}
           {isMyPosts && (
             <MdDelete
               size={60}
@@ -88,6 +87,16 @@ export const PostItem: React.FC<PostProps> = ({
             />
           )}
           <CommentsButton postId={displayedPost._id} />
+        </div>
+        <div>
+          {activity && (
+            <ActivityPopup
+              activity={{
+                ...activity,
+                pictures: [activity?.picture ?? "/empty-300x240.jpg"],
+              }}
+            />
+          )}
         </div>
       </div>
     </Card>

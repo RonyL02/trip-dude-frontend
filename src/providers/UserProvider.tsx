@@ -42,18 +42,18 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
           activities,
         });
       } catch {
-        navigate("/login");
+        navigate("/");
       }
     };
 
-    const publicRoutes = ["/login", "/register"];
+    const publicRoutes = ["/", "/register"];
 
     if (
       !refreshToken &&
       !accessToken &&
       !publicRoutes.includes(location.pathname)
     ) {
-      navigate("/login");
+      navigate("/");
     }
 
     if (!publicRoutes.includes(location.pathname)) {

@@ -44,7 +44,7 @@ export const UserDetails: FC<Props> = ({ user }) => {
   const handleLogout = async () => {
     await logout();
     setUser(null);
-    navigate("login");
+    navigate("/");
   };
 
   const goToMyPosts = () => {

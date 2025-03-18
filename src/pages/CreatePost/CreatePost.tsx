@@ -10,11 +10,12 @@ import { upload } from "../../api/fileApi";
 import { CreatePostDto } from "../../api/types";
 import { CreatePostForm } from "./components/CreatePostForm";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const CreatePost = () => {
   const form = useValidatedForm(createPostSchema);
   const { activityId } = useParams<{ activityId: string }>();
+  const navigate = useNavigate();
 
   const handleCreatePost = async (schema: CreatePostSchemaType) => {
     try {
@@ -29,6 +30,8 @@ export const CreatePost = () => {
       await createPost(newPost);
 
       toast.success("Post created successfully");
+
+      navigate("/profile/my-posts");
     } catch {
       toast.error("Failed to create post");
     }

@@ -38,10 +38,13 @@ export const ActivitiesList: FC<Props> = ({ activities }) => {
                   text="Post"
                   onClick={() => handleGoToCreatePost(activity._id!)}
                 />
-                <ActivityPopup activity={activity} />
+                <ActivityPopup activity={{
+                  ...activity,
+                  pictures:[activity?.picture ?? "/empty-300x240.jpg"]
+                }} />
                 <Button
                   text="Unsave"
-                  onClick={() => handleUnsave(activity._id ?? "")}
+                  onClick={() => handleUnsave(activity._id ?? "/empty-300x240.jpg")}
                 />
               </div>
             </Card>

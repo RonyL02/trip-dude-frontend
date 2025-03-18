@@ -23,7 +23,7 @@ const App = () => {
         <UserProvider>
           <Navbar />
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create-post/:activityId" element={<CreatePost />} />
             <Route path="/posts" element={<PostsFeed />} />

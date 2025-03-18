@@ -25,7 +25,7 @@ export const Register = () => {
       const newUser: CreateUserDto = { ...user, imageUrl: newFileUrl };
 
       await register(newUser);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       if (error instanceof AxiosError && error.status === 409) {
         toast.error("User already exists");
