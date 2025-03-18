@@ -30,7 +30,7 @@ const App = () => {
             <Route path="/comments/:postId" element={<Comments />} />
             <Route path="/activities" element={<ActivitySearch />} />
             <Route path="/activities/:activityId" element={<ActivityPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route index path="/profile" element={<Profile />} />
             <Route path="/profile/my-posts" element={<PostsFeed />} />
           </Routes>
         </UserProvider>
