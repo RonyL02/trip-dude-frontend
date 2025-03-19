@@ -24,6 +24,8 @@ type ProviderProps = {
   children: ReactNode;
 };
 
+const publicRoutes = ["/", "/register"];
+
 export const UserProvider: FC<ProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
@@ -41,27 +43,40 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
           ...user,
           populatedActivities: activities,
         });
+        navigate("/profile");
       } catch {
         navigate("/");
       }
     };
 
-    const publicRoutes = ["/", "/register"];
-
-    if (
-      !refreshToken &&
-      !accessToken &&
-      !publicRoutes.includes(location.pathname)
-    ) {
+    if (!refreshToken) {
       navigate("/");
-    }else{
-      navigate("/profile");
-    }
-
-    if (!publicRoutes.includes(location.pathname)) {
+    } else {
       fetchUser();
     }
-  }, [refreshToken, accessToken, navigate, location.pathname]);
+
+    //   if (
+    //     !refreshToken &&
+    //     !accessToken &&
+    //     !publicRoutes.includes(location.pathname)
+    //   ) {
+    //     navigate("/");
+    //   }
+
+    //   if (!publicRoutes.includes(location.pathname)) {
+    //     fetchUser();
+    //   }
+    // }, [refreshToken, accessToken, navigate, location.pathname]);
+
+    // useEffect(()=>{
+
+    //   if (
+    //     refreshToken &&
+    //     !publicRoutes.includes(location.pathname)
+    //   ) {
+    //     navigate("/profile");
+    //   }
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
