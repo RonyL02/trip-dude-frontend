@@ -54,6 +54,8 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
       !publicRoutes.includes(location.pathname)
     ) {
       navigate("/");
+    }else{
+      navigate("/profile");
     }
 
     if (!publicRoutes.includes(location.pathname)) {

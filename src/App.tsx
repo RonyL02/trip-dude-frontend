@@ -24,14 +24,19 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/create-post/:activityId" element={<CreatePost />} />
-            <Route path="/posts" element={<PostsFeed />} />
-            <Route path="/comments/:postId" element={<Comments />} />
-            <Route path="/activities" element={<ActivitySearch />} />
-            <Route path="/activities/:activityId" element={<ActivityPage />} />
-            <Route index path="/profile" element={<Profile />} />
-            <Route path="/profile/my-posts" element={<PostsFeed />} />
+            <Route path="/">
+              <Route path="/register" element={<Register />} />
+              <Route path="/create-post/:activityId" element={<CreatePost />} />
+              <Route path="/posts" element={<PostsFeed />} />
+              <Route path="/comments/:postId" element={<Comments />} />
+              <Route path="/activities" element={<ActivitySearch />} />
+              <Route
+                path="/activities/:activityId"
+                element={<ActivityPage />}
+              />
+              <Route index path="/profile" element={<Profile />} />
+              <Route path="/profile/my-posts" element={<PostsFeed />} />
+            </Route>
           </Routes>
         </UserProvider>
       </BrowserRouter>
