@@ -9,7 +9,7 @@ import {
 } from "react";
 import { User } from "../api/types";
 import Cookies from "js-cookie";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getProfile } from "../api/userApi";
 import { getSavedActivities } from "../api/activityApi";
 
@@ -24,13 +24,9 @@ type ProviderProps = {
   children: ReactNode;
 };
 
-const publicRoutes = ["/", "/register"];
-
 export const UserProvider: FC<ProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const accessToken = Cookies.get("access_token");
   const refreshToken = Cookies.get("refresh_token");
 
   useEffect(() => {
