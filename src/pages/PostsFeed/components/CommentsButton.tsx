@@ -28,7 +28,7 @@ const CommentsButton: React.FC<CommentsButtonProps> = ({ postId }) => {
       <FaCommentAlt
         style={{ cursor: "pointer" }}
         size={40}
-        onClick={() => navigate(`/comments/${postId}`)}
+        onClick={() => navigate(`/post-comments/${postId}`)}
       />
       <Title text={commentsCount.toString()} />
     </div>

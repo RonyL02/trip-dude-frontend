@@ -12,7 +12,8 @@ export type User = {
     imageUrl?: string;
     _id: string
     likedPosts: string[]
-    activities: SavedActivityDto[];
+    activities: string[];
+    populatedActivities: SavedActivityDto[];
 }
 
 export type Comment = {

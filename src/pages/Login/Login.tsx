@@ -29,9 +29,8 @@ export const Login = () => {
 
       setUser({
         ...user,
-        activities,
+        populatedActivities: activities,
       });
-      setUser(user);
       navigate("/profile");
     } catch {
       toast.error("Failed to login with Google");
@@ -46,9 +45,8 @@ export const Login = () => {
 
       setUser({
         ...user,
-        activities,
+        populatedActivities: activities,
       });
-      setUser(user);
       navigate("/profile");
     } catch {
       toast.error("Invalid credentials or user does not exist");

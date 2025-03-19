@@ -21,11 +21,18 @@ export const Register = () => {
     const { image, ...user } = schema;
 
     try {
-      const { newFileUrl } = await upload(image);
-      const newUser: CreateUserDto = { ...user, imageUrl: newFileUrl };
+      let newFileUrl: string | undefined;
+      if (image instanceof File) {
+        newFileUrl = (await upload(image)).newFileUrl;
+      }
+
+      const newUser: CreateUserDto = {
+        ...user,
+        ...(newFileUrl ? { imageUrl: newFileUrl } : {}),
+      };
 
       await register(newUser);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       if (error instanceof AxiosError && error.status === 409) {
         toast.error("User already exists");

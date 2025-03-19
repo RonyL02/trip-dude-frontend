@@ -47,7 +47,7 @@ export const ActivitySearch = () => {
       newActivity._id = newId;
       setUser({
         ...user!,
-        activities: [...(user?.activities ?? []), newActivity],
+        populatedActivities: [...(user?.populatedActivities ?? []), newActivity],
       });
       toast.success("Activity saved successfully");
     } catch {
@@ -83,7 +83,7 @@ export const ActivitySearch = () => {
               {displayedActivities?.map((activity) => (
                 <ActivityCard
                   isAlreadySaved={
-                    !!user.activities.find(({ id }) => id === activity.id)
+                    !!user.populatedActivities.find(({ id }) => id === activity.id)
                   }
                   key={activity.id}
                   activity={activity}

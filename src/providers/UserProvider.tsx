@@ -27,39 +27,30 @@ type ProviderProps = {
 export const UserProvider: FC<ProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const accessToken = Cookies.get("access_token");
   const refreshToken = Cookies.get("refresh_token");
-
+  const { pathname } = useLocation();
   useEffect(() => {
     const fetchUser = async () => {
-      try {
-        const user = await getProfile();
-        const activities = await getSavedActivities();
+      const user = await getProfile();
+      const activities = await getSavedActivities();
 
-        setUser({
-          ...user,
-          activities,
-        });
-      } catch {
-        navigate("/login");
-      }
+      setUser({
+        ...user,
+        populatedActivities: activities,
+      });
     };
 
-    const publicRoutes = ["/login", "/register"];
-
-    if (
-      !refreshToken &&
-      !accessToken &&
-      !publicRoutes.includes(location.pathname)
-    ) {
-      navigate("/login");
+    if (!refreshToken) {
+      navigate("/");
+    } else if (pathname === "/" || pathname === "") {
+      fetchUser()
+        .then(() => navigate("/profile"))
+        .catch(() => navigate("/"));
+    }else{
+      fetchUser()
+        .catch(() => navigate("/"));
     }
-
-    if (!publicRoutes.includes(location.pathname)) {
-      fetchUser();
-    }
-  }, [refreshToken, accessToken, navigate, location.pathname]);
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
