@@ -50,28 +50,6 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
       fetchUser()
         .catch(() => navigate("/"));
     }
-
-    //   if (
-    //     !refreshToken &&
-    //     !accessToken &&
-    //     !publicRoutes.includes(location.pathname)
-    //   ) {
-    //     navigate("/");
-    //   }
-
-    //   if (!publicRoutes.includes(location.pathname)) {
-    //     fetchUser();
-    //   }
-    // }, [refreshToken, accessToken, navigate, location.pathname]);
-
-    // useEffect(()=>{
-
-    //   if (
-    //     refreshToken &&
-    //     !publicRoutes.includes(location.pathname)
-    //   ) {
-    //     navigate("/profile");
-    //   }
   }, []);
 
   return (
