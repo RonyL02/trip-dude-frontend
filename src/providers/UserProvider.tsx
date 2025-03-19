@@ -9,7 +9,7 @@ import {
 } from "react";
 import { User } from "../api/types";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getProfile } from "../api/userApi";
 import { getSavedActivities } from "../api/activityApi";
 
@@ -28,27 +28,27 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
   const refreshToken = Cookies.get("refresh_token");
-
+  const { pathname } = useLocation();
   useEffect(() => {
     const fetchUser = async () => {
-      try {
-        const user = await getProfile();
-        const activities = await getSavedActivities();
+      const user = await getProfile();
+      const activities = await getSavedActivities();
 
-        setUser({
-          ...user,
-          populatedActivities: activities,
-        });
-        navigate("/profile");
-      } catch {
-        navigate("/");
-      }
+      setUser({
+        ...user,
+        populatedActivities: activities,
+      });
     };
 
     if (!refreshToken) {
       navigate("/");
-    } else {
-      fetchUser();
+    } else if (pathname === "/" || pathname === "") {
+      fetchUser()
+        .then(() => navigate("/prfile"))
+        .catch(() => navigate("/"));
+    }else{
+      fetchUser()
+        .catch(() => navigate("/"));
     }
 
     //   if (
