@@ -56,7 +56,7 @@ export const ActivitiesList: FC<Props> = ({ activities }) => {
       <Button
         className={styles.searchActivitieButton}
         text="Search For Activities"
-        onClick={() => navigate("/activities")}
+        onClick={() => navigate("/activities-search")}
       />
     </Card>
   );
