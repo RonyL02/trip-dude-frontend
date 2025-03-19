@@ -44,7 +44,7 @@ export const UserProvider: FC<ProviderProps> = ({ children }) => {
       navigate("/");
     } else if (pathname === "/" || pathname === "") {
       fetchUser()
-        .then(() => navigate("/prfile"))
+        .then(() => navigate("/profile"))
         .catch(() => navigate("/"));
     }else{
       fetchUser()
