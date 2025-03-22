@@ -31,7 +31,8 @@ export const ActivitiesList: FC<Props> = ({ activities }) => {
       <div className={styles.activitiesList}>
         {displayedActivities && displayedActivities.length > 0 ? (
           displayedActivities.map((activity) => (
-            <Card key={activity.id}>
+            <Card className={styles.activ}
+            key={activity.id}>
               <h3>{activity.name}</h3>
               <div className={styles.buttonList}>
                 <Button
