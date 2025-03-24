@@ -19,6 +19,7 @@
 .location{
     width: 100%;
     font-size: larger;
+    cursor: pointer;
 }
 
 .location:hover{
