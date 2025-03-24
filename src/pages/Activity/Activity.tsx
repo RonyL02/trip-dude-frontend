@@ -59,9 +59,9 @@ export const ActivityPage: FC<Props> = ({ activity: activityProp }) => {
           onError={() => setImgSrc("/empty-300x240.jpg")}
         />
         <p className={styles.details}>
-          {activity.rating ? `${activity.rating}⭐` : ""}
+          {activity.rating ? `${activity.rating}⭐| ` : ""}
           {activity.price?.amount && activity.price.currencyCode
-            ? `| ${activity.price?.amount}${activity.price.currencyCode}`
+            ? `${activity.price?.amount}${activity.price.currencyCode}`
             : ""}
         </p>
         <a
@@ -76,11 +76,9 @@ export const ActivityPage: FC<Props> = ({ activity: activityProp }) => {
       <div>
         <p
           className={styles.description}
-          dangerouslySetInnerHTML={{ __html: activity.shortDescription ?? "" }}
-        />
-        <p
-          className={styles.description}
-          dangerouslySetInnerHTML={{ __html: activity.description ?? "" }}
+          dangerouslySetInnerHTML={{
+            __html: activity.shortDescription ?? activity.description ?? "",
+          }}
         />
       </div>
     </Card>
