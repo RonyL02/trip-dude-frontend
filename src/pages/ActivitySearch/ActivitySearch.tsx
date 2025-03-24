@@ -30,11 +30,18 @@ export const ActivitySearch = () => {
 
   const handleSearchActivities = async (schema: ActivitySearchSchemaType) => {
     setIsLoading(true);
-    const activities = await getActivities(schema.location, schema.description);
-    setDisplayedActivities(activities);
-    toast.success(activities.length);
-    setResultMessage("No activity matches the criteria");
-    setIsLoading(false);
+    try {
+      const activities = await getActivities(
+        schema.location,
+        schema.description
+      );
+      setDisplayedActivities(activities);
+      setResultMessage("No activity matches the criteria");
+      setIsLoading(false);
+    } catch {
+      setResultMessage("Failed to fetch activities");
+      setIsLoading(false);
+    }
   };
 
   const handleSaveActivity = async (activity: Activity) => {
@@ -47,7 +54,10 @@ export const ActivitySearch = () => {
       newActivity._id = newId;
       setUser({
         ...user!,
-        populatedActivities: [...(user?.populatedActivities ?? []), newActivity],
+        populatedActivities: [
+          ...(user?.populatedActivities ?? []),
+          newActivity,
+        ],
       });
       toast.success("Activity saved successfully");
     } catch {
@@ -83,7 +93,9 @@ export const ActivitySearch = () => {
               {displayedActivities?.map((activity) => (
                 <ActivityCard
                   isAlreadySaved={
-                    !!user.populatedActivities.find(({ id }) => id === activity.id)
+                    !!user.populatedActivities.find(
+                      ({ id }) => id === activity.id
+                    )
                   }
                   key={activity.id}
                   activity={activity}

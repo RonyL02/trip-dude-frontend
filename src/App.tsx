@@ -27,7 +27,6 @@ const App = () => {
             <Route path="/feed" element={<PostsFeed />} />
             <Route path="/post-comments/:postId" element={<Comments />} />
             <Route path="/activities-search" element={<ActivitySearch />} />
-            {/* <Route path="/activities-preview/:activityId" element={<ActivityPage />} /> */}
             <Route index path="/profile" element={<Profile />} />
             <Route path="/profile/my-posts" element={<PostsFeed />} />
           </Routes>

@@ -10,12 +10,11 @@ export const LocationSearch: FC = () => {
   const [loading, setLoading] = useState(false);
   const [chosen, setChosen] = useState(false);
   useEffect(() => {
-    
     if (query.length < 2 || chosen) {
       setSuggestions([]);
       return;
     }
-    
+
     setChosen(false);
     const fetchSuggestions = async () => {
       setLoading(true);
@@ -31,24 +30,25 @@ export const LocationSearch: FC = () => {
 
     const timer = setTimeout(fetchSuggestions, 300);
     return () => clearTimeout(timer);
-  }, [query,chosen]);
+  }, [query, chosen]);
 
   useEffect(() => {
     if (chosen) {
       setSuggestions([]);
-      setLoading(false)
+      setLoading(false);
     }
   }, [chosen]);
 
   const handleInputChange = (input: string) => {
     setQuery(input);
     setValue("location", input);
-    setChosen(false)
+    setChosen(false);
   };
 
   return (
     <div className={styles.autocompleteContainer}>
       <input
+        autoComplete="off"
         type="text"
         placeholder="Enter your desired location"
         value={query}
