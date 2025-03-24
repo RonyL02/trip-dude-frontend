@@ -1,9 +1,13 @@
-import { FC } from "react";
+import { FC, HTMLAttributes } from "react";
 import styles from "./Title.module.css";
 type Props = {
   text: string;
-};
+} & HTMLAttributes<HTMLHeadingElement>;
 
-export const Title: FC<Props> = ({ text }) => {
-  return <h1 className={styles.title}>{text}</h1>;
+export const Title: FC<Props> = ({ text, ...props }) => {
+  return (
+    <h1 className={styles.title} {...props}>
+      {text}
+    </h1>
+  );
 };
