@@ -1,7 +1,5 @@
 .postsFeedContainer {
-    max-width: 800px;
     margin: auto;
-    padding: 20px;
     text-align: center;
   }
   
@@ -12,8 +10,10 @@
   }
   
   .postsList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    justify-items: center;
   }
   

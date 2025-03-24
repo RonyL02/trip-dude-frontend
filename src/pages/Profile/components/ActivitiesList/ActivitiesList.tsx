@@ -26,25 +26,33 @@ export const ActivitiesList: FC<Props> = ({ activities }) => {
     navigate(`/create-post/${id}`);
   };
   return (
-    <Card className={styles.activitiesContainer}>
-      <Title text="My Saved Activities" />
+    <div className={styles.activitiesContainer}>
+      <Title text="My Saved Activities" style={{ color: "white" }} />
       <div className={styles.activitiesList}>
         {displayedActivities && displayedActivities.length > 0 ? (
           displayedActivities.map((activity) => (
-            <Card key={activity.id}>
+            <Card className={styles.activ} key={activity.id}>
               <h3>{activity.name}</h3>
               <div className={styles.buttonList}>
                 <Button
+                  style={{ backgroundColor: "lightgreen" }}
                   text="Post"
                   onClick={() => handleGoToCreatePost(activity._id!)}
                 />
-                <ActivityPopup activity={{
-                  ...activity,
-                  pictures:[activity?.picture ?? "/empty-300x240.jpg"]
-                }} />
+                <div>
+                  <ActivityPopup
+                    activity={{
+                      ...activity,
+                      pictures: [activity?.picture ?? "/empty-300x240.jpg"],
+                    }}
+                  />
+                </div>
                 <Button
+                  style={{ backgroundColor: "red" }}
                   text="Unsave"
-                  onClick={() => handleUnsave(activity._id ?? "/empty-300x240.jpg")}
+                  onClick={() =>
+                    handleUnsave(activity._id ?? "/empty-300x240.jpg")
+                  }
                 />
               </div>
             </Card>
@@ -55,9 +63,9 @@ export const ActivitiesList: FC<Props> = ({ activities }) => {
       </div>
       <Button
         className={styles.searchActivitieButton}
-        text="Search For Activities"
+        text="Search For Activities🔍"
         onClick={() => navigate("/activities-search")}
       />
-    </Card>
+    </div>
   );
 };

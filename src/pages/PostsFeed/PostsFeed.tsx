@@ -48,7 +48,7 @@ const PostsFeed: React.FC = () => {
 
   return (
     <div className={styles.postsFeedContainer}>
-      <Title text={isMyPosts ? "My Posts" : "Posts"} />
+      <Title style={{color:'white'}} text={isMyPosts ? "My Posts" : "Posts"} />
       <div className={styles.postsList}>
         {posts.map((post) => (
           <PostItem

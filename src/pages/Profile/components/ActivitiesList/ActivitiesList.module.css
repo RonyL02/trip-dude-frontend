@@ -1,8 +1,12 @@
 .activitiesContainer {
-    justify-content: space-between;
-    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     height: 80vh;
+    width: 100%;
 }
+
 
 .activitiesList {
     display: flex;
@@ -15,9 +19,12 @@
 
 .searchActivitieButton {
     justify-self: flex-end;
+
 }
 
 .buttonList {
     display: flex;
     gap: 10px;
+    justify-content: space-between;
+    width: 70%;
 }
